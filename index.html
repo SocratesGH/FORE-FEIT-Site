@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FORE!FEIT</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0f0f0f;
+    --white: #f5f5f0;
+    --green: #3B6D11;
+    --green-light: #639922;
+    --green-dark: #27500A;
+    --gray: #1e1e1e;
+    --gray-mid: #2e2e2e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--black);
+    border-bottom: 1px solid var(--green-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 60px;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--white);
+    letter-spacing: 2px;
+  }
+
+  .nav-logo span { color: var(--green-light); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    opacity: 1;
+    color: var(--green-light);
+  }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* SPLIT HERO — black top, white bottom */
+  .hero-black {
+    background: var(--black);
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-black::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, #27500a33 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 18vw, 12rem);
+    letter-spacing: 4px;
+    line-height: 1;
+    color: var(--white);
+    position: relative;
+  }
+
+  .hero-title span { color: var(--green-light); }
+
+  .hero-tagline {
+    font-size: 1rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-top: 1.5rem;
+    opacity: 0.85;
+    position: relative;
+  }
+
+  .hero-white {
+    background: #f0efe8;
+    padding: 5rem 2rem;
+  }
+
+  .hero-white-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hero-white .section-label { color: var(--green-light); }
+  .hero-white .section-title { color: #0f0f0f; }
+  .hero-white .section-body { color: #444; }
+
+  /* DIVIDER between hero halves */
+  .hero-divider-bar {
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, transparent, var(--green), transparent);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+  }
+
+  .section-body {
+    color: rgba(245,245,240,0.65);
+    font-size: 1rem;
+    line-height: 1.9;
+    max-width: 680px;
+  }
+
+  .section-body p + p { margin-top: 1rem; }
+
+  /* DECK TOGGLE TABS — full width */
+  .deck-tabs {
+    display: flex;
+    width: 100%;
+    margin-bottom: 0;
+    border-radius: 6px 6px 0 0;
+    overflow: hidden;
+  }
+
+  .deck-tab {
+    flex: 1;
+    padding: 0.85rem 1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+  }
+
+  .deck-tab.black-tab {
+    background: #111;
+    color: rgba(245,245,240,0.4);
+    border: 1px solid #333;
+    border-bottom: none;
+  }
+
+  .deck-tab.black-tab.active { color: var(--white); border-color: #444; }
+
+  .deck-tab.white-tab {
+    background: #ccc;
+    color: #666;
+    border: 1px solid #aaa;
+    border-bottom: none;
+  }
+
+  .deck-tab.white-tab.active { background: #f0efe8; color: #0f0f0f; border-color: #bbb; }
+
+  /* DECK PANELS */
+  .deck-panel { display: none; }
+  .deck-panel.active { display: block; }
+
+  .black-panel {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 0 0 8px 8px;
+    padding: 2.5rem;
+  }
+
+  .white-panel {
+    background: #f0efe8;
+    border: 1px solid #ccc;
+    border-radius: 0 0 8px 8px;
+    padding: 2.5rem;
+  }
+
+  .black-panel .deck-panel-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .black-panel .deck-panel-body { color: rgba(245,245,240,0.6); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
+
+  .white-panel .deck-panel-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    color: #0f0f0f;
+    margin-bottom: 0.5rem;
+  }
+
+  .white-panel .deck-panel-body { color: #555; font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
+
+  /* CARD GRID */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .card {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .card.dark-card { background: var(--gray); border: 1px solid var(--gray-mid); }
+  .card.dark-card:hover { transform: translateY(-4px); border-color: var(--green); }
+  .card.light-card { background: #e8e8e0; border: 1px solid #bbb; }
+  .card.light-card:hover { transform: translateY(-4px); border-color: var(--green); }
+
+  .card-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .dark-card .card-img { background: var(--gray-mid); color: rgba(245,245,240,0.2); border-bottom: 1px solid #2a2a2a; }
+  .light-card .card-img { background: #d8d8d0; color: rgba(0,0,0,0.25); border-bottom: 1px solid #ccc; }
+
+  .card-body { padding: 1rem 1.25rem; }
+
+  .card-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.35rem;
+  }
+
+  .dark-card .card-name { color: var(--white); }
+  .light-card .card-name { color: #0f0f0f; }
+
+  .card-trigger {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+
+  .dark-card .card-trigger { color: var(--green-light); }
+  .light-card .card-trigger { color: var(--green); }
+
+  .card-desc { font-size: 0.85rem; line-height: 1.6; }
+  .dark-card .card-desc { color: rgba(245,245,240,0.5); }
+  .light-card .card-desc { color: #555; }
+
+  .card-tag {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .card-tag.negative { border: 1px solid #4a1a1a; color: #c97070; }
+  .card-tag.positive { border: 1px solid var(--green-dark); color: var(--green); }
+
+  /* HOW TO PLAY — coming soon panels */
+  .coming-soon-box {
+    margin-top: 1.5rem;
+    padding: 2rem;
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .black-panel .coming-soon-box {
+    background: #1a1a1a;
+    border: 1px dashed #333;
+    color: rgba(245,245,240,0.35);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .white-panel .coming-soon-box {
+    background: #e0dfd8;
+    border: 1px dashed #bbb;
+    color: rgba(0,0,0,0.3);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* FORFEIT LIST */
+  .forfeit-list {
+    list-style: none;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .black-panel .forfeit-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: rgba(245,245,240,0.65);
+    line-height: 1.6;
+  }
+
+  .white-panel .forfeit-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: #e0dfd8;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.6;
+  }
+
+  .forfeit-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .black-panel .forfeit-dot { background: var(--green-light); }
+  .white-panel .forfeit-dot { background: var(--green); }
+
+  .panel-subheading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    margin: 2rem 0 0.5rem;
+  }
+
+  .black-panel .panel-subheading { color: var(--white); }
+  .white-panel .panel-subheading { color: #0f0f0f; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--green-dark);
+    font-size: 0.8rem;
+    color: rgba(245,245,240,0.25);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--black);
+  }
+
+  footer span { color: var(--green-light); }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.75rem; }
+    .hero-black { padding: 3rem 1.25rem 2.5rem; }
+    .hero-white { padding: 3rem 1.25rem; }
+    section { padding: 3rem 1.25rem; }
+    .black-panel, .white-panel { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">FORE<span>!</span>FEIT</div>
+  <ul class="nav-links">
+    <li><a href="#" class="active" onclick="showPage('home', this)">Home</a></li>
+    <li><a href="#" onclick="showPage('cards', this)">Decks</a></li>
+    <li><a href="#" onclick="showPage('ways', this)">Guide</a></li>
+  </ul>
+</nav>
+
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+
+  <!-- Black hero section -->
+  <div class="hero-black">
+    <h1 class="hero-title">FORE<span>!</span>FEIT</h1>
+    <p class="hero-tagline">Excite Your Golf Game</p>
+  </div>
+
+  <div class="hero-divider-bar"></div>
+
+  <!-- White concept section -->
+  <div class="hero-white">
+    <div class="hero-white-inner">
+      <p class="section-label">The Concept</p>
+      <h2 class="section-title">How It Works</h2>
+      <div class="section-body">
+        <p>FORE!FEIT is a card game played during your group's round of golf. Each card is tied to a common golfing event — when your golf shot triggers one of these events, you bare that card for each subsequent hole.</p>
+        <p>The only way to get rid of a card is for someone else to trigger the same event. The game rewards good play, punishes bad luck, and keeps every hole interesting.</p>
+        <p>The rules are intentionally open-ended as every group plays differently. Use the guidelines as a starting point and make the game your own.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Get in Touch section -->
+  <div class="hero-black" style="min-height: auto; padding: 5rem 2rem;">
+    <div style="max-width: 900px; width: 100%; text-align: left; position: relative;">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="section-body" style="margin-top: 1rem;">
+        <p>Want to place an order, have a question, or want to make a suggestion? Reach out — we'd love to hear from you.</p>
+      </div>
+      <div style="margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.25rem;">
+        <a href="tel:0733195999" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--white); opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
+          <div style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--green-dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--green-light);"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <span style="font-size: 1.05rem; letter-spacing: 1px;">073 319 5999</span>
+        </a>
+        <a href="mailto:monrevwpersonal@gmail.com" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--white); opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
+          <div style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--green-dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--green-light);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+          </div>
+          <span style="font-size: 1.05rem; letter-spacing: 1px;">monrevwpersonal@gmail.com</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- DECKS & CARDS PAGE -->
+<div id="cards" class="page">
+
+  <section style="padding-top: 4rem;">
+    <p class="section-label">The Decks</p>
+    <h2 class="section-title">Two Decks, Many Possibilities</h2>
+    <div class="section-body">
+      <p>FORE!FEIT comes in two decks — one for the bad moments and one for the good. Select a card below to find out more information on it!</p>
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <div class="deck-tabs" id="cards-tabs">
+        <button class="deck-tab black-tab active" onclick="switchPanel('cards', 'black', this)">Consequence Deck</button>
+        <button class="deck-tab white-tab" onclick="switchPanel('cards', 'white', this)">Reward Deck</button>
+      </div>
+
+      <div id="cards-panel-black" class="deck-panel black-panel active">
+        <div class="deck-panel-title">Consequence Cards</div>
+        <div class="card-grid">
+
+          <div class="card dark-card">
+            <div class="card-img">Photo</div>
+            <div class="card-body">
+              <div class="card-name">Bunker Buster</div>
+              <div class="card-trigger">Trigger: Ball lands in a bunker</div>
+              <span class="card-tag negative">Consequence</span>
+            </div>
+          </div>
+
+          <div class="card dark-card">
+            <div class="card-img">Photo</div>
+            <div class="card-body">
+              <div class="card-name">Splash Zone</div>
+              <div class="card-trigger">Trigger: Ball lands in water</div>
+              <span class="card-tag negative">Consequence</span>
+            </div>
+          </div>
+
+          <div class="card dark-card">
+            <div class="card-img">Photo</div>
+            <div class="card-body">
+              <div class="card-name">Tree Hugger</div>
+              <div class="card-trigger">Trigger: Ball hits a tree</div>
+              <span class="card-tag negative">Consequence</span>
+            </div>
+          </div>
+
+          <div class="card dark-card">
+            <div class="card-img">Photo</div>
+            <div class="card-body">
+              <div class="card-name">The Houdini</div>
+              <div class="card-trigger">Trigger: Ball is lost</div>
+              <span class="card-tag negative">Consequence</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="cards-panel-white" class="deck-panel white-panel">
+        <div class="deck-panel-title">Reward Cards</div>
+        <div class="card-grid">
+          <div class="card light-card">
+            <div class="card-img">Photo</div>
+            <div class="card-body">
+              <div class="card-name">Coming Soon</div>
+              <div class="card-trigger">Trigger: TBC</div>
+              <div class="card-desc">Reward deck cards coming soon.</div>
+              <span class="card-tag positive">Reward</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- HOW TO PLAY PAGE -->
+<div id="ways" class="page">
+
+  <section style="padding-top: 4rem;">
+    <p class="section-label">Gameplay</p>
+    <h2 class="section-title">How to Play</h2>
+    <div class="section-body">
+      <p>FORE!FEIT is designed to be flexible. Select a deck below for a guide on how to play, being sure to add your own spin on it if you please!</p>
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <div class="deck-tabs" id="ways-tabs">
+        <button class="deck-tab black-tab active" onclick="switchPanel('ways', 'black', this)">Consequence Deck</button>
+        <button class="deck-tab white-tab" onclick="switchPanel('ways', 'white', this)">Reward Deck</button>
+      </div>
+
+      <!-- BLACK WAYS PANEL -->
+      <div id="ways-panel-black" class="deck-panel black-panel active">
+
+        <div class="panel-subheading">How to Play</div>
+        <div class="coming-soon-box">Coming Soon</div>
+
+        <div class="panel-subheading">Possible Forfeits</div>
+        <div class="coming-soon-box">Coming Soon</div>
+
+      </div>
+
+      <!-- WHITE WAYS PANEL -->
+      <div id="ways-panel-white" class="deck-panel white-panel">
+
+        <div class="panel-subheading">How to Play</div>
+        <div class="coming-soon-box">Coming Soon</div>
+
+        <div class="panel-subheading">Possible Rewards</div>
+        <div class="coming-soon-box">Coming Soon</div>
+
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <span>FORE!FEIT</span> &nbsp;·&nbsp; The Golf Card Game
+</footer>
+
+<script>
+  function showPage(id, el) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function switchPanel(page, deck, btn) {
+    const tabs = document.querySelectorAll('#' + page + '-tabs .deck-tab');
+    tabs.forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(page + '-panel-black').classList.remove('active');
+    document.getElementById(page + '-panel-white').classList.remove('active');
+    document.getElementById(page + '-panel-' + deck).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
