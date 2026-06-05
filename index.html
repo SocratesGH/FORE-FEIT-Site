@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FORE!FEIT</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght=400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas Neue&family=Barlow:wght=400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --black: #0f0f0f;
@@ -230,7 +230,7 @@
   .deck-tab.white-tab.active { background: #f0efe8; color: #0f0f0f; border-color: #bbb; }
 
   .deck-panel { display: none; }
-  .deck-panel.active { display: block; }
+  .page.active .deck-panel.active { display: block; }
 
   .black-panel {
     background: #1a1a1a;
@@ -310,7 +310,7 @@
   .card-tag.negative { border: 1px solid #4a1a1a; color: #c97070; background: #000; }
   .card-tag.positive { border: 1px solid var(--green-dark); color: var(--white); background: var(--green); }
 
-  /* BLACK RANDOMIZER & BUILDER TOOLS */
+  /* TOOL CONTAINER */
   .tool-container {
     background: #141414;
     border: 1px solid #222;
@@ -392,62 +392,52 @@
     line-height: 1.8;
   }
 
-  /* CHIPS / ROUNDED CORNER BOX FORMATTING */
+  /* BUILDER SUBHEADINGS */
   .builder-subheading {
     font-family: 'Bebas Neue', sans-serif;
     letter-spacing: 1px;
     font-size: 1.2rem;
-    margin: 1.5rem 0 0.5rem;
+    margin: 0 0 0.5rem;
     text-transform: uppercase;
     opacity: 0.9;
+    color: #0f0f0f;
   }
-  .consequence-heading { color: var(--white); }
-  .reward-heading { color: #0f0f0f; }
 
   .selector-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 0.75rem;
-    margin-bottom: 1rem;
     border-radius: 6px;
     padding: 1rem;
   }
 
-  /* Dark themed Consequence selection styles */
-  .consequence-grid-bg {
-    background: #0d0d0d;
-    border: 1px solid #222;
-  }
-  .consequence-grid-bg .selector-item {
-    background: #1a1a1a;
-    border: 1px solid #333;
-    color: var(--white);
-  }
-  .consequence-grid-bg .selector-item:hover { background: #222; border-color: #555; }
-  .consequence-grid-bg .selector-item.selected { 
-    border-color: var(--green-light); 
-    background: #1b2613;
-    color: var(--white);
-  }
-
-  /* White themed Reward selection styles */
-  .reward-wrapper {
+  /* Shared Light Layout Custom Configurations for Builder Elements */
+  .custom-section-wrapper {
     background: #f0efe8;
     padding: 1.25rem;
     border-radius: 6px;
-    margin-top: 1.5rem;
     border: 1px solid #ccc;
+    margin-bottom: 1.5rem;
   }
-  .reward-grid-bg {
+
+  .custom-grid-bg {
     background: #e4e3dc;
     border: 1px solid #bbb;
   }
-  .reward-grid-bg .selector-item {
+
+  .custom-grid-bg .selector-item {
     background: #ffffff;
     border: 1px solid #bbb;
     color: #0f0f0f;
   }
-  .reward-grid-bg .selector-item:hover { background: #fcfcfc; border-color: #999; }
+  .custom-grid-bg .selector-item:hover { background: #fcfcfc; border-color: #999; }
+  
+  .consequence-grid-bg .selector-item.selected { 
+    border-color: #c97070; 
+    background: #fce8e6;
+    color: #0f0f0f;
+  }
+
   .reward-grid-bg .selector-item.selected { 
     border-color: var(--green); 
     background: #e2f0d9;
@@ -588,7 +578,6 @@
 
 <nav>
   <div class="nav-logo">FORE<span>!</span>FEIT</div>
-  <!-- Dropdown Menu Style Selector -->
   <div class="nav-dropdown-container">
     <select class="nav-select" id="pageSelector" onchange="handleDropdownNavigation(this.value)">
       <option value="home">Home</option>
@@ -779,13 +768,12 @@
 <div id="ways" class="page">
   <section style="padding-top: 4rem;">
     <p class="section-label">Setup Guide</p>
-    <h2 class="section-title">Choosing Cards Building a Deck</h2>
+    <h2 class="section-title">Choosing Cards</h2>
     <div class="section-body">
-      <p>Before teeing off, your group needs to decide which matches and dynamics you want to introduce to the course. Select either the Custom or Random engine below to configure your custom game profile.</p>
+      <p>Before teeing off, your group needs to decide which matches and dynamics you want to introduce to the course. Select either the Custom or Random configuration below to design your pool.</p>
     </div>
 
     <div style="margin-top: 3rem;">
-      <!-- Updated Tab labels to Custom Deck and Random Deck -->
       <div class="deck-tabs" id="builder-tabs">
         <button class="deck-tab black-tab active" onclick="switchPanel('builder', 'black', this)">Custom Deck</button>
         <button class="deck-tab black-tab" onclick="switchPanel('builder', 'white', this)">Random Deck</button>
@@ -794,27 +782,30 @@
       <!-- Custom Deck Builder Subsection Panel -->
       <div id="builder-panel-black" class="deck-panel active">
         <div class="tool-container">
-          <!-- Subtitle updated to "Deck Building, Custom Deck" -->
-          <p class="section-label" style="font-size:0.75rem; margin-bottom:0.5rem;">Deck Building, Custom Deck</p>
-          <h3 style="font-family:'Bebas Neue', sans-serif; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem;">Custom Deck Session</h3>
-          <p style="font-size:0.9rem; color:rgba(245,245,240,0.6); margin-bottom:1rem;">Select your individual game components. Selected cards display a clean green highlight accent.</p>
+          <!-- Tagline updated to "Deck Building" and Title to "Build Your Own" -->
+          <p class="section-label" style="font-size:0.75rem; margin-bottom:0.5rem;">Deck Building</p>
+          <h3 style="font-family:'Bebas Neue', sans-serif; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem;">Build Your Own</h3>
+          <p style="font-size:0.9rem; color:rgba(245,245,240,0.6); margin-bottom:1.5rem;">Select your individual game components. Selected cards display a clean colorful highlight accent.</p>
           
-          <!-- Consequences Section -->
-          <div class="builder-subheading consequence-heading">Consequence Cards</div>
-          <div class="selector-grid consequence-grid-bg" id="consequenceSelectorGrid">
-            <!-- JS inserts options dynamically -->
+          <!-- White Themed Consequences Section Wrapper -->
+          <div class="custom-section-wrapper">
+            <div class="builder-subheading">Consequence Cards</div>
+            <div class="selector-grid custom-grid-bg consequence-grid-bg" id="consequenceSelectorGrid">
+              <!-- JS inserts options dynamically -->
+            </div>
           </div>
 
           <!-- White Themed Rewards Section Wrapper -->
-          <div class="reward-wrapper">
-            <div class="builder-subheading reward-heading">Reward Cards</div>
-            <div class="selector-grid reward-grid-bg" id="rewardSelectorGrid">
+          <div class="custom-section-wrapper">
+            <div class="builder-subheading">Reward Cards</div>
+            <div class="selector-grid custom-grid-bg reward-grid-bg" id="rewardSelectorGrid">
               <!-- JS inserts options dynamically -->
             </div>
           </div>
           
           <div class="tool-btn-group" style="margin-top: 2rem;">
-            <button class="tool-btn" onclick="generateCustomSession()">Compile Custom Deck</button>
+            <!-- Button changed to "Create Deck" -->
+            <button class="tool-btn" onclick="generateCustomSession()">Create Deck</button>
             <button class="tool-btn secondary" onclick="downloadSession('customResults')">Download PNG</button>
           </div>
           <div id="customResults" class="results-box" style="margin-top:1.5rem; display:none;"></div>
@@ -824,8 +815,9 @@
       <!-- Randomizer Subsection Panel -->
       <div id="builder-panel-white" class="deck-panel">
         <div class="tool-container">
-          <p class="section-label" style="font-size:0.75rem; margin-bottom:0.5rem;">Random Engine</p>
-          <h3 style="font-family:'Bebas Neue', sans-serif; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem;">Randomized Session Generator</h3>
+          <!-- Tagline updated to "Deck Building" and Title to "Randomize the Game" -->
+          <p class="section-label" style="font-size:0.75rem; margin-bottom:0.5rem;">Deck Building</p>
+          <h3 style="font-family:'Bebas Neue', sans-serif; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem;">Randomize the Game</h3>
           
           <div class="tool-grid">
             <div class="tool-field">
@@ -843,7 +835,8 @@
           </div>
           
           <div class="tool-btn-group">
-            <button class="tool-btn" onclick="generateRandomSession()">Draw Random Deck</button>
+            <!-- Button changed to "Create Deck" -->
+            <button class="tool-btn" onclick="generateRandomSession()">Create Deck</button>
             <button class="tool-btn secondary" onclick="downloadSession('randomResults')">Download PNG</button>
           </div>
           
@@ -902,7 +895,6 @@
 
 <!-- CORE APPLICATION LOGIC -->
 <script>
-  // Dynamic navigation handler connected to dropdown changes
   function handleDropdownNavigation(pageId) {
     showPage(pageId, null);
   }
@@ -911,7 +903,6 @@
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     
-    // Explicitly update the dropdown element value to match current active state
     const selector = document.getElementById('pageSelector');
     if (selector && selector.value !== id) {
       selector.value = id;
