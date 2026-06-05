@@ -287,12 +287,12 @@
     font-size: 0.7rem;
     letter-spacing: 1px;
     text-transform: uppercase;
-    padding: 3px 10px;
+    padding: 3px 12px;
     border-radius: 20px;
   }
 
-  .card-tag.negative { border: 1px solid #4a1a1a; color: #c97070; }
-  .card-tag.positive { border: 1px solid var(--green-dark); color: var(--green); }
+  .card-tag.negative { border: 1px solid #4a1a1a; color: #c97070; background: #000; }
+  .card-tag.positive { border: 1px solid var(--green-dark); color: var(--white); background: var(--green); }
 
   /* UPDATED BLACK RANDOMIZER & BUILDER TOOLS */
   .tool-container {
@@ -376,51 +376,81 @@
     line-height: 1.8;
   }
 
-  /* CUSTOM SELECTION CHECKBOXES WITH BALANCED CONTRAST */
+  /* CHIPS / ROUNDED CORNER BOX FORMATTING */
+  .builder-subheading {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    color: var(--white);
+    margin: 1.5rem 0 0.5rem;
+    text-transform: uppercase;
+    opacity: 0.9;
+  }
+
   .selector-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    max-height: 250px;
-    overflow-y: auto;
-    padding: 1rem;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
     background: #0d0d0d;
     border: 1px solid #222;
-    border-radius: 4px;
+    border-radius: 6px;
+    padding: 1rem;
   }
 
   .selector-item {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: center;
+    text-align: center;
     background: #1a1a1a;
-    padding: 0.5rem 0.75rem;
-    border-radius: 4px;
+    padding: 0.6rem 1rem;
+    border-radius: 20px; /* Tag style rounded corners */
     cursor: pointer;
     font-size: 0.9rem;
-    border: 1px solid transparent;
+    border: 1px solid #333;
     transition: background 0.2s, border-color 0.2s, color 0.2s;
     color: var(--white);
   }
 
-  .selector-item:hover { background: #222; }
+  .selector-item:hover { background: #222; border-color: #555; }
   
-  /* Consequence selected = Solid Premium Black */
-  .selector-item.selected-consequence { 
-    background: #000000; 
-    border-color: #4a1a1a; 
-    color: #c97070;
-  }
-  
-  /* Reward selected = Solid Premium White */
-  .selector-item.selected-reward { 
-    background: #ffffff; 
-    border-color: #bbb; 
-    color: #0f0f0f;
+  /* Selected Box Format styling */
+  .selector-item.selected { 
+    border-color: var(--green-light); 
+    background: #1b2613;
+    color: var(--white);
   }
   
   .selector-item input { display: none; }
+
+  /* Outputted rounded layout styles */
+  .output-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .output-tag-item {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 20px; /* Rectangular Tag with rounded corners */
+    font-weight: 500;
+  }
+  
+  .output-tag-item.consequence-style {
+    background: #000000;
+    color: #c97070;
+    border: 1px solid #4a1a1a;
+  }
+
+  .output-tag-item.reward-style {
+    background: var(--white);
+    color: #0f0f0f;
+    border: 1px solid #bbb;
+  }
 
   /* GAMEPLAY FLOW LIST */
   .flow-list {
@@ -680,7 +710,7 @@
   </section>
 </div>
 
-<!-- DEDICATED STANDALONE CARD VIEW PAGE -->
+<!-- DETAILED STANDALONE CARD VIEW PAGE -->
 <div id="card-detail-view" class="page">
   <section style="padding-top: 2rem;">
     <button class="tool-btn secondary" onclick="returnToDecks()">&larr; Return to Decks</button>
@@ -721,13 +751,20 @@
         <div class="tool-container">
           <p class="section-label" style="font-size:0.75rem; margin-bottom:0.5rem;">Deck Engine</p>
           <h3 style="font-family:'Bebas Neue', sans-serif; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem;">Custom Deck Session</h3>
-          <p style="font-size:0.9rem; color:rgba(245,245,240,0.6); margin-bottom:1.5rem;">Manually toggle and select the specific cards you want to assemble. Consequence cards highlight black, and Reward cards highlight white.</p>
+          <p style="font-size:0.9rem; color:rgba(245,245,240,0.6); margin-bottom:1rem;">Select your individual game components. Selected cards display a clean green highlight accent.</p>
           
-          <div class="selector-grid" id="customSelectorGrid">
+          <!-- SEPARATED SECTIONS INSIDE CUSTOM BUILDER -->
+          <div class="builder-subheading">Consequence Cards</div>
+          <div class="selector-grid" id="consequenceSelectorGrid">
+            <!-- JS inserts options dynamically -->
+          </div>
+
+          <div class="builder-subheading">Reward Cards</div>
+          <div class="selector-grid" id="rewardSelectorGrid">
             <!-- JS inserts options dynamically -->
           </div>
           
-          <div class="tool-btn-group">
+          <div class="tool-btn-group" style="margin-top: 2rem;">
             <button class="tool-btn" onclick="generateCustomSession()">Compile Custom Deck</button>
             <button class="tool-btn secondary" onclick="downloadSession('customResults')">Download PNG</button>
           </div>
@@ -864,41 +901,43 @@
 <script>
   const consequenceCards = ['Bunker Buster', 'Bush Whacker', 'Splash Zone', 'The Houdini', 'Tree Hugger', 'Over Board'];
   const rewardCards = ['Chip Tastic', 'Eager Eagle', 'Early Bird', 'Go Long', 'Par Fection', 'The Ace'];
-  const totalCards = consequenceCards.concat(rewardCards);
 
-  // Initialize the Custom Builder Checkboxes dynamically
+  // Initialize the Custom Builder Checkboxes dynamically split across 2 grids
   window.addEventListener('DOMContentLoaded', () => {
-    const grid = document.getElementById('customSelectorGrid');
-    totalCards.forEach(card => {
+    const consequenceGrid = document.getElementById('consequenceSelectorGrid');
+    const rewardGrid = document.getElementById('rewardSelectorGrid');
+    
+    consequenceCards.forEach(card => {
       const label = document.createElement('label');
       label.className = 'selector-item';
-      
-      const isConsequence = consequenceCards.includes(card);
-      const subLabel = isConsequence ? ' (C)' : ' (R)';
-      
       label.innerHTML = `
-        <input type="checkbox" value="${card}" data-type="${isConsequence ? 'consequence' : 'reward'}" onchange="toggleCardSelect(this)">
-        <span>${card}${subLabel}</span>
+        <input type="checkbox" value="${card}" data-type="consequence" onchange="toggleCardSelect(this)">
+        <span>${card}</span>
       `;
-      grid.appendChild(label);
+      consequenceGrid.appendChild(label);
+    });
+
+    rewardCards.forEach(card => {
+      const label = document.createElement('label');
+      label.className = 'selector-item';
+      label.innerHTML = `
+        <input type="checkbox" value="${card}" data-type="reward" onchange="toggleCardSelect(this)">
+        <span>${card}</span>
+      `;
+      rewardGrid.appendChild(label);
     });
   });
 
   function toggleCardSelect(checkbox) {
-    const type = checkbox.getAttribute('data-type');
     if(checkbox.checked) {
-      if(type === 'consequence') {
-        checkbox.parentElement.classList.add('selected-consequence');
-      } else {
-        checkbox.parentElement.classList.add('selected-reward');
-      }
+      checkbox.parentElement.classList.add('selected');
     } else {
-      checkbox.parentElement.classList.remove('selected-consequence', 'selected-reward');
+      checkbox.parentElement.classList.remove('selected');
     }
   }
 
   function generateCustomSession() {
-    const checkedBoxes = document.querySelectorAll('#customSelectorGrid input:checked');
+    const checkedBoxes = document.querySelectorAll('#builder-panel-black input:checked');
     const displayBox = document.getElementById('customResults');
     
     if(checkedBoxes.length === 0) {
@@ -918,13 +957,26 @@
       }
     });
     
-    let htmlContent = `<strong style="color:var(--green-light); text-transform:uppercase; font-size:0.85rem; letter-spacing:1px; display:block; margin-bottom:0.75rem;">Your Custom Battle-Deck:</strong>`;
+    let htmlContent = `<strong style="color:var(--green-light); text-transform:uppercase; font-size:0.85rem; letter-spacing:1px; display:block; margin-bottom:1rem;">Your Custom Battle-Deck:</strong>`;
     
     if(chosenConsequences.length > 0) {
-      htmlContent += `<div style="margin-bottom:0.75rem;"><span style="color:#c97070; font-family:'Bebas Neue', sans-serif; letter-spacing:1px; font-size:1.1rem; display:block;">&mdash; Consequences &mdash;</span>${chosenConsequences.join('<br>')}</div>`;
+      htmlContent += `<div style="margin-bottom:1.25rem;">
+        <span style="color:#c97070; font-family:'Bebas Neue', sans-serif; letter-spacing:1px; font-size:1.1rem; display:block; margin-bottom:0.5rem;">Consequences</span>
+        <div class="output-tag-list">`;
+      chosenConsequences.forEach(card => {
+        htmlContent += `<span class="output-tag-item consequence-style">${card}</span>`;
+      });
+      htmlContent += `</div></div>`;
     }
+    
     if(chosenRewards.length > 0) {
-      htmlContent += `<div><span style="color:var(--green-light); font-family:'Bebas Neue', sans-serif; letter-spacing:1px; font-size:1.1rem; display:block;">&mdash; Rewards &mdash;</span>${chosenRewards.join('<br>')}</div>`;
+      htmlContent += `<div>
+        <span style="color:var(--green-light); font-family:'Bebas Neue', sans-serif; letter-spacing:1px; font-size:1.1rem; display:block; margin-bottom:0.5rem;">Rewards</span>
+        <div class="output-tag-list">`;
+      chosenRewards.forEach(card => {
+        htmlContent += `<span class="output-tag-item reward-style">${card}</span>`;
+      });
+      htmlContent += `</div></div>`;
     }
     
     displayBox.style.display = 'block';
@@ -936,13 +988,23 @@
     let limit = parseInt(document.getElementById('cardCount').value);
     let displayBox = document.getElementById('randomResults');
     
-    let pool = mode === 'Consequences' ? consequenceCards : mode === 'Rewards' ? rewardCards : totalCards;
+    let pool = mode === 'Consequences' ? consequenceCards : mode === 'Rewards' ? rewardCards : consequenceCards.concat(rewardCards);
     
     let shuffled = [...pool].sort(() => 0.5 - Math.random());
     let selected = shuffled.slice(0, Math.min(limit, shuffled.length));
     
+    let htmlContent = `<strong style="color:var(--green-light); text-transform:uppercase; font-size:0.85rem; letter-spacing:1px; display:block; margin-bottom:1rem;">Random Generated Pool:</strong><div class="output-tag-list">`;
+    
+    selected.forEach(card => {
+      let isConsequence = consequenceCards.includes(card);
+      let styleClass = isConsequence ? 'consequence-style' : 'reward-style';
+      htmlContent += `<span class="output-tag-item ${styleClass}">${card}</span>`;
+    });
+    
+    htmlContent += `</div>`;
+    
     displayBox.style.display = 'block';
-    displayBox.innerHTML = `<strong style="color:var(--green-light); text-transform:uppercase; font-size:0.85rem; letter-spacing:1px; display:block; margin-bottom:0.5rem;">Random Generated Pool:</strong>` + selected.join('<br>');
+    displayBox.innerHTML = htmlContent;
   }
 
   function downloadSession(targetId) {
