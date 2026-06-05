@@ -400,7 +400,7 @@
     margin: 0 0 0.5rem;
     text-transform: uppercase;
     opacity: 0.9;
-    color: #0f0f0f;
+    color: var(--white);
   }
 
   .selector-grid {
@@ -411,37 +411,37 @@
     padding: 1rem;
   }
 
-  /* Shared Light Layout Custom Configurations for Builder Elements */
+  /* Black on Black Theme Configuration for Custom Build Subsection Wrapper */
   .custom-section-wrapper {
-    background: #f0efe8;
+    background: #0f0f0f;
     padding: 1.25rem;
     border-radius: 6px;
-    border: 1px solid #ccc;
+    border: 1px solid #222;
     margin-bottom: 1.5rem;
   }
 
   .custom-grid-bg {
-    background: #e4e3dc;
-    border: 1px solid #bbb;
+    background: #141414;
+    border: 1px solid #222;
   }
 
   .custom-grid-bg .selector-item {
-    background: #ffffff;
-    border: 1px solid #bbb;
-    color: #0f0f0f;
+    background: #1e1e1e;
+    border: 1px solid #333;
+    color: var(--white);
   }
-  .custom-grid-bg .selector-item:hover { background: #fcfcfc; border-color: #999; }
+  .custom-grid-bg .selector-item:hover { background: #262626; border-color: #444; }
   
   .consequence-grid-bg .selector-item.selected { 
-    border-color: #c97070; 
-    background: #fce8e6;
-    color: #0f0f0f;
+    border-color: #8c3535; 
+    background: #2a1616;
+    color: #e59999;
   }
 
   .reward-grid-bg .selector-item.selected { 
-    border-color: var(--green); 
-    background: #e2f0d9;
-    color: #0f0f0f;
+    border-color: var(--green-light); 
+    background: #1b2e0b;
+    color: #a3d96c;
   }
 
   .selector-item {
@@ -782,12 +782,11 @@
       <!-- Custom Deck Builder Subsection Panel -->
       <div id="builder-panel-black" class="deck-panel active">
         <div class="tool-container">
-          <!-- Tagline updated to "Deck Building" and Title to "Build Your Own" -->
           <p class="section-label" style="font-size:0.75rem; margin-bottom:0.5rem;">Deck Building</p>
-          <h3 style="font-family:'Bebas Neue', sans-serif; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem;">Build Your Own</h3>
+          <h3 style="font-family:'Bebas Neue', sans-serif; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem; color:var(--white);">Build Your Own</h3>
           <p style="font-size:0.9rem; color:rgba(245,245,240,0.6); margin-bottom:1.5rem;">Select your individual game components. Selected cards display a clean colorful highlight accent.</p>
           
-          <!-- White Themed Consequences Section Wrapper -->
+          <!-- Black-on-Black Consequence Section Wrapper -->
           <div class="custom-section-wrapper">
             <div class="builder-subheading">Consequence Cards</div>
             <div class="selector-grid custom-grid-bg consequence-grid-bg" id="consequenceSelectorGrid">
@@ -795,7 +794,7 @@
             </div>
           </div>
 
-          <!-- White Themed Rewards Section Wrapper -->
+          <!-- Black-on-Black Reward Section Wrapper -->
           <div class="custom-section-wrapper">
             <div class="builder-subheading">Reward Cards</div>
             <div class="selector-grid custom-grid-bg reward-grid-bg" id="rewardSelectorGrid">
@@ -804,7 +803,6 @@
           </div>
           
           <div class="tool-btn-group" style="margin-top: 2rem;">
-            <!-- Button changed to "Create Deck" -->
             <button class="tool-btn" onclick="generateCustomSession()">Create Deck</button>
             <button class="tool-btn secondary" onclick="downloadSession('customResults')">Download PNG</button>
           </div>
@@ -815,7 +813,6 @@
       <!-- Randomizer Subsection Panel -->
       <div id="builder-panel-white" class="deck-panel">
         <div class="tool-container">
-          <!-- Tagline updated to "Deck Building" and Title to "Randomize the Game" -->
           <p class="section-label" style="font-size:0.75rem; margin-bottom:0.5rem;">Deck Building</p>
           <h3 style="font-family:'Bebas Neue', sans-serif; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem;">Randomize the Game</h3>
           
@@ -835,7 +832,6 @@
           </div>
           
           <div class="tool-btn-group">
-            <!-- Button changed to "Create Deck" -->
             <button class="tool-btn" onclick="generateRandomSession()">Create Deck</button>
             <button class="tool-btn secondary" onclick="downloadSession('randomResults')">Download PNG</button>
           </div>
