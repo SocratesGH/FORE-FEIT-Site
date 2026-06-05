@@ -48,27 +48,43 @@
 
   .nav-logo span { color: var(--green-light); }
 
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
+  /* Dropdown Selector Styling */
+  .nav-dropdown-container {
+    position: relative;
+    display: inline-block;
   }
 
-  .nav-links a {
+  .nav-select {
+    background: var(--gray);
     color: var(--white);
-    text-decoration: none;
+    border: 1px solid var(--green-dark);
+    padding: 0.4rem 1.5rem 0.4rem 0.75rem;
+    font-family: 'Barlow', sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
-    letter-spacing: 1px;
     text-transform: uppercase;
-    opacity: 0.7;
-    transition: opacity 0.2s, color 0.2s;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
   }
 
-  .nav-links a:hover,
-  .nav-links a.active {
-    opacity: 1;
+  .nav-select:focus {
+    border-color: var(--green-light);
+  }
+
+  .nav-dropdown-container::after {
+    content: '▼';
+    font-size: 0.6rem;
     color: var(--green-light);
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
   }
 
   .page { display: none; }
@@ -294,7 +310,7 @@
   .card-tag.negative { border: 1px solid #4a1a1a; color: #c97070; background: #000; }
   .card-tag.positive { border: 1px solid var(--green-dark); color: var(--white); background: var(--green); }
 
-  /* UPDATED BLACK RANDOMIZER & BUILDER TOOLS */
+  /* BLACK RANDOMIZER & BUILDER TOOLS */
   .tool-container {
     background: #141414;
     border: 1px solid #222;
@@ -381,21 +397,61 @@
     font-family: 'Bebas Neue', sans-serif;
     letter-spacing: 1px;
     font-size: 1.2rem;
-    color: var(--white);
     margin: 1.5rem 0 0.5rem;
     text-transform: uppercase;
     opacity: 0.9;
   }
+  .consequence-heading { color: var(--white); }
+  .reward-heading { color: #0f0f0f; }
 
   .selector-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 0.75rem;
     margin-bottom: 1rem;
-    background: #0d0d0d;
-    border: 1px solid #222;
     border-radius: 6px;
     padding: 1rem;
+  }
+
+  /* Dark themed Consequence selection styles */
+  .consequence-grid-bg {
+    background: #0d0d0d;
+    border: 1px solid #222;
+  }
+  .consequence-grid-bg .selector-item {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: var(--white);
+  }
+  .consequence-grid-bg .selector-item:hover { background: #222; border-color: #555; }
+  .consequence-grid-bg .selector-item.selected { 
+    border-color: var(--green-light); 
+    background: #1b2613;
+    color: var(--white);
+  }
+
+  /* White themed Reward selection styles */
+  .reward-wrapper {
+    background: #f0efe8;
+    padding: 1.25rem;
+    border-radius: 6px;
+    margin-top: 1.5rem;
+    border: 1px solid #ccc;
+  }
+  .reward-grid-bg {
+    background: #e4e3dc;
+    border: 1px solid #bbb;
+  }
+  .reward-grid-bg .selector-item {
+    background: #ffffff;
+    border: 1px solid #bbb;
+    color: #0f0f0f;
+  }
+  .reward-grid-bg .selector-item:hover { background: #fcfcfc; border-color: #999; }
+  .reward-grid-bg .selector-item.selected { 
+    border-color: var(--green); 
+    background: #e2f0d9;
+    color: #0f0f0f;
   }
 
   .selector-item {
@@ -403,23 +459,11 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: #1a1a1a;
     padding: 0.6rem 1rem;
-    border-radius: 20px; /* Tag style rounded corners */
+    border-radius: 20px;
     cursor: pointer;
     font-size: 0.9rem;
-    border: 1px solid #333;
     transition: background 0.2s, border-color 0.2s, color 0.2s;
-    color: var(--white);
-  }
-
-  .selector-item:hover { background: #222; border-color: #555; }
-  
-  /* Selected Box Format styling */
-  .selector-item.selected { 
-    border-color: var(--green-light); 
-    background: #1b2613;
-    color: var(--white);
   }
   
   .selector-item input { display: none; }
@@ -436,7 +480,7 @@
     display: inline-block;
     padding: 0.4rem 1rem;
     font-size: 0.9rem;
-    border-radius: 20px; /* Rectangular Tag with rounded corners */
+    border-radius: 20px;
     font-weight: 500;
   }
   
@@ -536,8 +580,6 @@
 
   @media (max-width: 600px) {
     nav { padding: 0 1rem; }
-    .nav-links { gap: 1rem; }
-    .nav-links a { font-size: 0.75rem; }
     .black-panel, .white-panel, .tool-container { padding: 1.5rem; }
   }
 </style>
@@ -546,12 +588,15 @@
 
 <nav>
   <div class="nav-logo">FORE<span>!</span>FEIT</div>
-  <ul class="nav-links">
-    <li><a href="#" class="active" onclick="showPage('home', this)">Home</a></li>
-    <li><a href="#" onclick="showPage('cards', this)">Decks</a></li>
-    <li><a href="#" onclick="showPage('ways', this)">Guide</a></li>
-    <li><a href="#" onclick="showPage('faq', this)">FAQ</a></li>
-  </ul>
+  <!-- Dropdown Menu Style Selector -->
+  <div class="nav-dropdown-container">
+    <select class="nav-select" id="pageSelector" onchange="handleDropdownNavigation(this.value)">
+      <option value="home">Home</option>
+      <option value="cards">Decks</option>
+      <option value="ways">Guide</option>
+      <option value="faq">FAQ</option>
+    </select>
+  </div>
 </nav>
 
 <!-- HOME PAGE -->
@@ -740,28 +785,32 @@
     </div>
 
     <div style="margin-top: 3rem;">
-      <!-- Uniform Deck Builder Toggle System (Both Styled Black) -->
+      <!-- Updated Tab labels to Custom Deck and Random Deck -->
       <div class="deck-tabs" id="builder-tabs">
-        <button class="deck-tab black-tab active" onclick="switchPanel('builder', 'black', this)">Custom Builder Mode</button>
-        <button class="deck-tab black-tab" onclick="switchPanel('builder', 'white', this)">Random Engine Mode</button>
+        <button class="deck-tab black-tab active" onclick="switchPanel('builder', 'black', this)">Custom Deck</button>
+        <button class="deck-tab black-tab" onclick="switchPanel('builder', 'white', this)">Random Deck</button>
       </div>
 
       <!-- Custom Deck Builder Subsection Panel -->
       <div id="builder-panel-black" class="deck-panel active">
         <div class="tool-container">
-          <p class="section-label" style="font-size:0.75rem; margin-bottom:0.5rem;">Deck Engine</p>
+          <!-- Subtitle updated to "Deck Building, Custom Deck" -->
+          <p class="section-label" style="font-size:0.75rem; margin-bottom:0.5rem;">Deck Building, Custom Deck</p>
           <h3 style="font-family:'Bebas Neue', sans-serif; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem;">Custom Deck Session</h3>
           <p style="font-size:0.9rem; color:rgba(245,245,240,0.6); margin-bottom:1rem;">Select your individual game components. Selected cards display a clean green highlight accent.</p>
           
-          <!-- SEPARATED SECTIONS INSIDE CUSTOM BUILDER -->
-          <div class="builder-subheading">Consequence Cards</div>
-          <div class="selector-grid" id="consequenceSelectorGrid">
+          <!-- Consequences Section -->
+          <div class="builder-subheading consequence-heading">Consequence Cards</div>
+          <div class="selector-grid consequence-grid-bg" id="consequenceSelectorGrid">
             <!-- JS inserts options dynamically -->
           </div>
 
-          <div class="builder-subheading">Reward Cards</div>
-          <div class="selector-grid" id="rewardSelectorGrid">
-            <!-- JS inserts options dynamically -->
+          <!-- White Themed Rewards Section Wrapper -->
+          <div class="reward-wrapper">
+            <div class="builder-subheading reward-heading">Reward Cards</div>
+            <div class="selector-grid reward-grid-bg" id="rewardSelectorGrid">
+              <!-- JS inserts options dynamically -->
+            </div>
           </div>
           
           <div class="tool-btn-group" style="margin-top: 2rem;">
@@ -853,11 +902,21 @@
 
 <!-- CORE APPLICATION LOGIC -->
 <script>
+  // Dynamic navigation handler connected to dropdown changes
+  function handleDropdownNavigation(pageId) {
+    showPage(pageId, null);
+  }
+
   function showPage(id, el) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-    if(el) el.classList.add('active');
+    
+    // Explicitly update the dropdown element value to match current active state
+    const selector = document.getElementById('pageSelector');
+    if (selector && selector.value !== id) {
+      selector.value = id;
+    }
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -871,7 +930,6 @@
     btn.classList.add('active');
   }
 
-  // Navigation handlers for Card standalone view
   function loadCardDetail(name, tag, imgUrl, description) {
     document.getElementById('dtTitle').innerText = name;
     document.getElementById('dtTag').innerText = tag;
@@ -885,15 +943,13 @@
       tagEl.className = 'card-tag positive';
     }
     
-    // Smoothly shift to detail page view
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('card-detail-view').classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function returnToDecks() {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('cards').classList.add('active');
+    showPage('cards', null);
   }
 </script>
 
@@ -902,7 +958,6 @@
   const consequenceCards = ['Bunker Buster', 'Bush Whacker', 'Splash Zone', 'The Houdini', 'Tree Hugger', 'Over Board'];
   const rewardCards = ['Chip Tastic', 'Eager Eagle', 'Early Bird', 'Go Long', 'Par Fection', 'The Ace'];
 
-  // Initialize the Custom Builder Checkboxes dynamically split across 2 grids
   window.addEventListener('DOMContentLoaded', () => {
     const consequenceGrid = document.getElementById('consequenceSelectorGrid');
     const rewardGrid = document.getElementById('rewardSelectorGrid');
