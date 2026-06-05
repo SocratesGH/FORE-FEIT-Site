@@ -71,11 +71,10 @@
     color: var(--green-light);
   }
 
-  /* PAGE VISIBILITY CONTROL */
   .page { display: none; }
   .page.active { display: block; }
 
-  /* SPLIT HERO — black top, white bottom */
+  /* HERO UNITS */
   .hero-black {
     background: var(--black);
     min-height: 60vh;
@@ -132,7 +131,6 @@
   .hero-white .section-title { color: #0f0f0f; }
   .hero-white .section-body { color: #444; }
 
-  /* DIVIDER between hero halves */
   .hero-divider-bar {
     width: 100%;
     height: 3px;
@@ -176,7 +174,7 @@
 
   .section-body p + p { margin-top: 1rem; }
 
-  /* DECK TOGGLE TABS — full width */
+  /* DECK TOGGLE TABS */
   .deck-tabs {
     display: flex;
     width: 100%;
@@ -204,7 +202,7 @@
     border-bottom: none;
   }
 
-  .deck-tab.black-tab.active { color: var(--white); border-color: #444; }
+  .deck-tab.black-tab.active { color: var(--white); border-color: #444; background: #1a1a1a; }
 
   .deck-tab.white-tab {
     background: #ccc;
@@ -215,7 +213,6 @@
 
   .deck-tab.white-tab.active { background: #f0efe8; color: #0f0f0f; border-color: #bbb; }
 
-  /* DECK PANELS */
   .deck-panel { display: none; }
   .deck-panel.active { display: block; }
 
@@ -241,18 +238,6 @@
     margin-bottom: 0.5rem;
   }
 
-  .black-panel .deck-panel-body { color: rgba(245,245,240,0.6); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
-
-  .white-panel .deck-panel-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    letter-spacing: 2px;
-    color: #0f0f0f;
-    margin-bottom: 0.5rem;
-  }
-
-  .white-panel .deck-panel-body { color: #555; font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
-
   /* CARD GRID */
   .card-grid {
     display: grid;
@@ -266,6 +251,8 @@
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.2s, border-color 0.2s;
+    text-decoration: none;
+    display: block;
   }
 
   .card.dark-card { background: var(--gray); border: 1px solid var(--gray-mid); }
@@ -287,8 +274,8 @@
     display: block;
   }
 
-  .dark-card .card-img { background: var(--gray-mid); color: rgba(245,245,240,0.2); border-bottom: 1px solid #2a2a2a; }
-  .light-card .card-img { background: #d8d8d0; color: rgba(0,0,0,0.25); border-bottom: 1px solid #ccc; }
+  .dark-card .card-img { background: var(--gray-mid); border-bottom: 1px solid #2a2a2a; }
+  .light-card .card-img { background: #d8d8d0; border-bottom: 1px solid #ccc; }
 
   .card-body { padding: 1rem 1.25rem; }
 
@@ -301,20 +288,6 @@
 
   .dark-card .card-name { color: var(--white); }
   .light-card .card-name { color: #0f0f0f; }
-
-  .card-trigger {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 0.5rem;
-  }
-
-  .dark-card .card-trigger { color: var(--green-light); }
-  .light-card .card-trigger { color: var(--green); }
-
-  .card-desc { font-size: 0.85rem; line-height: 1.6; }
-  .dark-card .card-desc { color: rgba(245,245,240,0.5); }
-  .light-card .card-desc { color: #555; }
 
   .card-tag {
     display: inline-block;
@@ -329,87 +302,152 @@
   .card-tag.negative { border: 1px solid #4a1a1a; color: #c97070; }
   .card-tag.positive { border: 1px solid var(--green-dark); color: var(--green); }
 
-  /* HOW TO PLAY — coming soon panels */
-  .coming-soon-box {
-    margin-top: 1.5rem;
+  /* UPDATED PREMIUM BLACK RANDOMIZER & BUILDER TOOLS */
+  .tool-container {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
     padding: 2rem;
-    border-radius: 6px;
-    text-align: center;
+    margin-top: 1.5rem;
   }
 
-  .black-panel .coming-soon-box {
+  .tool-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+  }
+
+  .tool-field {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tool-field label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--green-light);
+    font-weight: 600;
+  }
+
+  .tool-input {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    color: var(--white);
+    padding: 0.75rem 1rem;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.95rem;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .tool-input:focus {
+    border-color: var(--green-light);
+  }
+
+  .tool-btn-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .tool-btn {
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-transform: uppercase;
+  }
+
+  .tool-btn:hover { background: var(--green-light); }
+  .tool-btn.secondary { background: #2e2e2e; border: 1px solid #444; }
+  .tool-btn.secondary:hover { background: #3e3e3e; }
+
+  .results-box {
+    background: #0f0f0f;
+    border: 1px solid #222;
+    border-radius: 4px;
+    padding: 1.5rem;
+    min-height: 100px;
+    color: var(--white);
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  /* CUSTOM DECK BUILDER CARD CHECKBOX SELECTION */
+  .selector-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    border: 1px solid #222;
+    padding: 1rem;
+    background: #0d0d0d;
+    border-radius: 4px;
+  }
+
+  .selector-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     background: #1a1a1a;
-    border: 1px dashed #333;
-    color: rgba(245,245,240,0.35);
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
     font-size: 0.9rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    border: 1px solid transparent;
+    transition: background 0.2s, border-color 0.2s;
   }
 
-  .white-panel .coming-soon-box {
-    background: #e0dfd8;
-    border: 1px dashed #bbb;
-    color: rgba(0,0,0,0.3);
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
+  .selector-item:hover { background: #222; }
+  .selector-item.selected { border-color: var(--green-light); background: #1b2613; }
+  .selector-item input { display: none; }
 
-  /* FORFEIT LIST */
-  .forfeit-list {
+  /* GAMEPLAY FLOW LIST */
+  .flow-list {
     list-style: none;
     margin-top: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
   }
 
-  .black-panel .forfeit-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 1rem 1.25rem;
-    background: #1a1a1a;
-    border: 1px solid #2a2a2a;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    color: rgba(245,245,240,0.65);
-    line-height: 1.6;
+  .flow-step {
+    background: #141414;
+    border: 1px solid #222;
+    border-left: 4px solid var(--green-light);
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 4px 4px 0;
   }
 
-  .white-panel .forfeit-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 1rem 1.25rem;
-    background: #e0dfd8;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    color: #444;
-    line-height: 1.6;
-  }
-
-  .forfeit-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-top: 6px;
-    flex-shrink: 0;
-  }
-
-  .black-panel .forfeit-dot { background: var(--green-light); }
-  .white-panel .forfeit-dot { background: var(--green); }
-
-  .panel-subheading {
+  .flow-step h4 {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 1.3rem;
-    letter-spacing: 2px;
-    margin: 2rem 0 0.5rem;
+    letter-spacing: 1px;
+    color: var(--white);
+    margin-bottom: 0.25rem;
   }
 
-  .black-panel .panel-subheading { color: var(--white); }
-  .white-panel .panel-subheading { color: #0f0f0f; }
+  .flow-step p {
+    font-size: 0.95rem;
+    color: rgba(245,245,240,0.65);
+  }
 
   /* FOOTER */
   footer {
@@ -429,9 +467,6 @@
     nav { padding: 0 1rem; }
     .nav-links { gap: 1rem; }
     .nav-links a { font-size: 0.75rem; }
-    .hero-black { padding: 3rem 1.25rem 2.5rem; }
-    .hero-white { padding: 3rem 1.25rem; }
-    section { padding: 3rem 1.25rem; }
     .black-panel, .white-panel { padding: 1.5rem; }
   }
 </style>
@@ -497,143 +532,192 @@
     <p class="section-label">The Decks</p>
     <h2 class="section-title">Two Decks, Many Possibilities</h2>
     <div class="section-body">
-      <p>FORE!FEIT comes in two decks — one for the bad moments and one for the good. Select a deck and a card below to find out more information about it!</p>
+      <p>FORE!FEIT comes in two decks — one for the bad moments and one for the good. Select a card below to see its details on a standalone card view.</p>
     </div>
     <div style="margin-top: 2rem;">
       <div class="deck-tabs" id="cards-tabs">
         <button class="deck-tab black-tab active" onclick="switchPanel('cards', 'black', this)">Consequence Deck</button>
         <button class="deck-tab white-tab" onclick="switchPanel('cards', 'white', this)">Reward Deck</button>
       </div>
+      
+      <!-- Consequence Cards Panel -->
       <div id="cards-panel-black" class="deck-panel black-panel active">
-        <div class="deck-panel-title">Consequence Cards</div>
         <div class="card-grid">
-          <div class="card dark-card" onclick="openCardModal('Bunker Buster','consequence')">
+          <a href="cards/bunker-buster.html" class="card dark-card">
             <div class="card-img"><img src="images/bunker-buster.png" alt="Bunker Buster"></div>
             <div class="card-body">
               <div class="card-name">Bunker Buster</div>
               <span class="card-tag negative">Consequence</span>
             </div>
-          </div>
-          <div class="card dark-card" onclick="openCardModal('Splash Zone','consequence')">
+          </a>
+          <a href="cards/splash-zone.html" class="card dark-card">
             <div class="card-img"><img src="images/splash-zone.png" alt="Splash Zone"></div>
             <div class="card-body">
               <div class="card-name">Splash Zone</div>
               <span class="card-tag negative">Consequence</span>
             </div>
-          </div>
-          <div class="card dark-card" onclick="openCardModal('Tree Hugger','consequence')">
+          </a>
+          <a href="cards/tree-hugger.html" class="card dark-card">
             <div class="card-img"><img src="images/tree-hugger.png" alt="Tree Hugger"></div>
             <div class="card-body">
               <div class="card-name">Tree Hugger</div>
               <span class="card-tag negative">Consequence</span>
             </div>
-          </div>
-          <div class="card dark-card" onclick="openCardModal('The Houdini','consequence')">
+          </a>
+          <a href="cards/the-houdini.html" class="card dark-card">
             <div class="card-img"><img src="images/the-houdini.png" alt="The Houdini"></div>
             <div class="card-body">
               <div class="card-name">The Houdini</div>
               <span class="card-tag negative">Consequence</span>
             </div>
-          </div>
-          <div class="card dark-card" onclick="openCardModal('Bush Whacker','consequence')">
+          </a>
+          <a href="cards/bush-whacker.html" class="card dark-card">
             <div class="card-img"><img src="images/bush-whacker.png" alt="Bush Whacker"></div>
             <div class="card-body">
               <div class="card-name">Bush Whacker</div>
               <span class="card-tag negative">Consequence</span>
             </div>
-          </div>
-          <div class="card dark-card" onclick="openCardModal('Over Board','consequence')">
+          </a>
+          <a href="cards/over-board.html" class="card dark-card">
             <div class="card-img"><img src="images/over-board.png" alt="Over Board"></div>
             <div class="card-body">
               <div class="card-name">Over Board</div>
               <span class="card-tag negative">Consequence</span>
             </div>
-          </div>
+          </a>
         </div>
       </div>
+
+      <!-- Reward Cards Panel -->
       <div id="cards-panel-white" class="deck-panel white-panel">
-        <div class="deck-panel-title">Reward Cards</div>
         <div class="card-grid">
-          <div class="card light-card" onclick="openCardModal('Chip Tastic','reward')">
+          <a href="cards/chip-tastic.html" class="card light-card">
             <div class="card-img"><img src="images/chip-tastic.png" alt="Chip Tastic"></div>
             <div class="card-body">
               <div class="card-name">Chip Tastic</div>
               <span class="card-tag positive">Reward</span>
             </div>
-          </div>
-          <div class="card light-card" onclick="openCardModal('Eager Eagle','reward')">
+          </a>
+          <a href="cards/eager-eagle.html" class="card light-card">
             <div class="card-img"><img src="images/eager-eagle.png" alt="Eager Eagle"></div>
             <div class="card-body">
               <div class="card-name">Eager Eagle</div>
               <span class="card-tag positive">Reward</span>
             </div>
-          </div>
-          <div class="card light-card" onclick="openCardModal('Early Bird','reward')">
+          </a>
+          <a href="cards/early-bird.html" class="card light-card">
             <div class="card-img"><img src="images/early-bird.png" alt="Early Bird"></div>
             <div class="card-body">
               <div class="card-name">Early Bird</div>
               <span class="card-tag positive">Reward</span>
             </div>
-          </div>
-          <div class="card light-card" onclick="openCardModal('Go Long','reward')">
+          </a>
+          <a href="cards/go-long.html" class="card light-card">
             <div class="card-img"><img src="images/go-long.png" alt="Go Long"></div>
             <div class="card-body">
               <div class="card-name">Go Long</div>
               <span class="card-tag positive">Reward</span>
             </div>
-          </div>
-          <div class="card light-card" onclick="openCardModal('Par Fection','reward')">
+          </a>
+          <a href="cards/par-fection.html" class="card light-card">
             <div class="card-img"><img src="images/par-fection.png" alt="Par Fection"></div>
             <div class="card-body">
               <div class="card-name">Par Fection</div>
               <span class="card-tag positive">Reward</span>
             </div>
-          </div>
-          <div class="card light-card" onclick="openCardModal('The Ace','reward')">
+          </a>
+          <a href="cards/the-ace.html" class="card light-card">
             <div class="card-img"><img src="images/the-ace.png" alt="The Ace"></div>
             <div class="card-body">
               <div class="card-name">The Ace</div>
               <span class="card-tag positive">Reward</span>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>
   </section>
 </div>
 
-<!-- HOW TO PLAY PAGE -->
+<!-- GUIDE: BUILDING A DECK & GAMEPLAY FLOW PAGE -->
 <div id="ways" class="page">
   <section style="padding-top: 4rem;">
-    <p class="section-label">Gameplay</p>
-    <h2 class="section-title">How to Play</h2>
+    <p class="section-label">Setup Guide</p>
+    <h2 class="section-title">Building a Deck</h2>
     <div class="section-body">
-      <p>FORE!FEIT is designed to be flexible. Select a deck below for a guide on how to play, being sure to add your own spin on it if you please!</p>
+      <p>Before teeing off, your group needs to decide which matches and dynamics you want to introduce to the course. Customize your session using our automated deck tools below.</p>
     </div>
-    <div style="margin-top: 2rem;">
-      <div class="deck-tabs" id="ways-tabs">
-        <button class="deck-tab black-tab active" onclick="switchPanel('ways', 'black', this)">Consequence Deck</button>
-        <button class="deck-tab white-tab" onclick="switchPanel('ways', 'white', this)">Reward Deck</button>
+
+    <!-- Custom Deck Builder Subsection -->
+    <div class="tool-container">
+      <p class="section-label" style="font-size:0.75rem; margin-bottom:0.5rem;">Deck Engine</p>
+      <h3 style="font-family:'Bebas Neue'; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem;">Custom Deck Session</h3>
+      <p style="font-size:0.9rem; color:rgba(245,245,240,0.6); margin-bottom:1.5rem;">Manually toggle and select the specific cards you want to assemble for your custom deck list.</p>
+      
+      <div class="selector-grid" id="customSelectorGrid">
+        <!-- JS inserts options dynamically -->
       </div>
-      <div id="ways-panel-black" class="deck-panel black-panel active">
-        <div class="panel-subheading">How to Play</div>
-        <div class="coming-soon-box">Coming Soon</div>
-        <div class="panel-subheading">Possible Forfeits</div>
-        <div class="coming-soon-box">Coming Soon</div>
+      
+      <div class="tool-btn-group">
+        <button class="tool-btn" onclick="generateCustomSession()">Compile Custom Deck</button>
+        <button class="tool-btn secondary" onclick="downloadSession('customResults')">Download PNG</button>
       </div>
-      <div id="ways-panel-white" class="deck-panel white-panel">
-        <div class="panel-subheading">How to Play</div>
-        <div class="coming-soon-box">Coming Soon</div>
-        <div class="panel-subheading">Randomiser</div>
-        <div style="margin:20px 0;">
-          <select id="gameMode"><option>Consequences</option><option>Rewards</option><option>Mixed</option></select>
-          <input id="cardCount" type="number" min="1" max="12" value="4">
-          <button onclick="generateSession()">Generate</button>
-          <button onclick="downloadSession()">Download PNG</button>
-          <div id="randomResults" style="margin-top:15px;"></div>
+      <div id="customResults" class="results-box" style="margin-top:1.5rem; display:none;"></div>
+    </div>
+
+    <!-- Randomizer Subsection -->
+    <div class="tool-container">
+      <p class="section-label" style="font-size:0.75rem; margin-bottom:0.5rem;">Random Engine</p>
+      <h3 style="font-family:'Bebas Neue'; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem;">Randomized Session Generator</h3>
+      
+      <div class="tool-grid">
+        <div class="tool-field">
+          <label for="gameMode">Pool Profile</label>
+          <select id="gameMode" class="tool-input">
+            <option value="Consequences">Consequences Only</option>
+            <option value="Rewards">Rewards Only</option>
+            <option value="Mixed">Mixed Deck Match</option>
+          </select>
         </div>
-        <div class="panel-subheading">Possible Rewards</div>
-        <div class="coming-soon-box">Coming Soon</div>
+        <div class="tool-field">
+          <label for="cardCount">Hand Size Capacity</label>
+          <input id="cardCount" type="number" class="tool-input" min="1" max="12" value="4">
+        </div>
+      </div>
+      
+      <div class="tool-btn-group">
+        <button class="tool-btn" onclick="generateRandomSession()">Draw Random Deck</button>
+        <button class="tool-btn secondary" onclick="downloadSession('randomResults')">Download PNG</button>
+      </div>
+      
+      <div id="randomResults" class="results-box" style="margin-top:1.5rem; display:none;"></div>
+    </div>
+  </section>
+
+  <!-- Gameplay Flow Section -->
+  <section>
+    <p class="section-label">Round Mechanics</p>
+    <h2 class="section-title">Gameplay Flow</h2>
+    <div class="section-body">
+      <p>Once your pool or hand is decided, follow this operational workflow throughout your matching play:</p>
+      
+      <div class="flow-list">
+        <div class="flow-step">
+          <h4>Step 1: Draw and Unveil</h4>
+          <p>Bring your compiled Custom or Randomized session printout/digital file to the first tee box. Ensure all players recognize the active event cards.</p>
+        </div>
+        <div class="flow-step">
+          <h4>Step 2: Triggering an Event</h4>
+          <p>As soon as a player hits a shot that matches an active card criteria (e.g., hitting a water hazard or landing a perfect chip), they instantly assume custody of that card.</p>
+        </div>
+        <div class="flow-step">
+          <h4>Step 3: Carrying the Penalty/Reward</h4>
+          <p>The card owner is bound by that action/condition for each subsequent hole until the condition is broken or transferred.</p>
+        </div>
+        <div class="flow-step">
+          <h4>Step 4: Transference & Mitigation</h4>
+          <p>To discard a card, another player in your group must trigger that exact same event context. The card then shifts over to the new player instantly.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -657,7 +741,7 @@
   <span>FORE!FEIT</span> &nbsp;·&nbsp; The Golf Card Game
 </footer>
 
-<!-- NAVIGATION & SCRIPT CONTROL -->
+<!-- CORE APPLICATION LOGIC -->
 <script>
   function showPage(id, el) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -680,14 +764,79 @@
 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script>
-  const consequenceCards=['Bunker Buster','Bush Whacker','Splash Zone','The Houdini','Tree Hugger','Over Board'];
-  const rewardCards=['Chip Tastic','Eager Eagle','Early Bird','Go Long','Par Fection','The Ace'];
-  
-  function openCardModal(n,t){
-    alert("Card Selected: " + n); 
+  const consequenceCards = ['Bunker Buster', 'Bush Whacker', 'Splash Zone', 'The Houdini', 'Tree Hugger', 'Over Board'];
+  const rewardCards = ['Chip Tastic', 'Eager Eagle', 'Early Bird', 'Go Long', 'Par Fection', 'The Ace'];
+  const totalCards = consequenceCards.concat(rewardCards);
+
+  // Initialize the Custom Builder Checkboxes dynamically
+  window.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('customSelectorGrid');
+    totalCards.forEach(card => {
+      const label = document.createElement('label');
+      label.className = 'selector-item';
+      
+      const isConsequence = consequenceCards.includes(card);
+      const subLabel = isConsequence ? ' (C)' : ' (R)';
+      
+      label.innerHTML = `
+        <input type="checkbox" value="${card}" onchange="toggleCardSelect(this)">
+        <span>${card}${subLabel}</span>
+      `;
+      grid.appendChild(label);
+    });
+  });
+
+  function toggleCardSelect(checkbox) {
+    if(checkbox.checked) {
+      checkbox.parentElement.classList.add('selected');
+    } else {
+      checkbox.parentElement.classList.remove('selected');
+    }
   }
-  function generateSession(){let m=document.getElementById('gameMode').value,c=parseInt(document.getElementById('cardCount').value);let pool=m==='Consequences'?consequenceCards:m==='Rewards'?rewardCards:consequenceCards.concat(rewardCards);let res=[];for(let i=0;i<Math.min(c,pool.length);i++){res.push(pool.sort(()=>0.5-Math.random())[0]);}document.getElementById('randomResults').innerHTML=res.join('<br>');}
-  function downloadSession(){html2canvas(document.getElementById('randomResults')).then(canvas=>{let a=document.createElement('a');a.download='forefeit-session.png';a.href=canvas.toDataURL();a.click();});}
+
+  function generateCustomSession() {
+    const checkedBoxes = document.querySelectorAll('#customSelectorGrid input:checked');
+    const displayBox = document.getElementById('customResults');
+    
+    if(checkedBoxes.length === 0) {
+      displayBox.style.display = 'block';
+      displayBox.innerHTML = '<span style="color:#c97070;">Please choose at least one card to build your session.</span>';
+      return;
+    }
+    
+    let selectedList = [];
+    checkedBoxes.forEach(box => selectedList.push(box.value));
+    
+    displayBox.style.display = 'block';
+    displayBox.innerHTML = `<strong style="color:var(--green-light); text-transform:uppercase; font-size:0.85rem; letter-spacing:1px; display:block; margin-bottom:0.5rem;">Your Custom Battle-Deck:</strong>` + selectedList.join('<br>');
+  }
+
+  function generateRandomSession() {
+    let mode = document.getElementById('gameMode').value;
+    let limit = parseInt(document.getElementById('cardCount').value);
+    let displayBox = document.getElementById('randomResults');
+    
+    let pool = mode === 'Consequences' ? consequenceCards : mode === 'Rewards' ? rewardCards : totalCards;
+    
+    // Create a shallow copy and shuffle it randomly
+    let shuffled = [...pool].sort(() => 0.5 - Math.random());
+    let selected = shuffled.slice(0, Math.min(limit, shuffled.length));
+    
+    displayBox.style.display = 'block';
+    displayBox.innerHTML = `<strong style="color:var(--green-light); text-transform:uppercase; font-size:0.85rem; letter-spacing:1px; display:block; margin-bottom:0.5rem;">Random Generated Pool:</strong>` + selected.join('<br>');
+  }
+
+  function downloadSession(targetId) {
+    const targetElement = document.getElementById(targetId);
+    if(targetElement.innerHTML === "" || targetElement.style.display === "none") return;
+    
+    html2canvas(targetElement, { backgroundColor: '#0f0f0f' }).then(canvas => {
+      let link = document.createElement('a');
+      link.download = 'forefeit-deck-session.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    });
+  }
 </script>
 </body>
 </html>
