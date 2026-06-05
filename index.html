@@ -849,15 +849,15 @@
           
           <div class="tool-grid">
             <div class="tool-field">
-              <label for="gameMode">Pool Profile</label>
+              <label for="gameMode">Gamemode</label>
               <select id="gameMode" class="tool-input">
-                <option value="Consequences">Consequences Only</option>
-                <option value="Rewards">Rewards Only</option>
+                <option value="Consequences">Consequence Cards Only</option>
+                <option value="Rewards">Reward Cards Only</option>
                 <option value="Mixed">Mixed Deck Match</option>
               </select>
             </div>
             <div class="tool-field">
-              <label for="cardCount">Hand Size Capacity</label>
+              <label for="cardCount">Number of Cards</label>
               <input id="cardCount" type="number" class="tool-input" min="1" max="12" value="4">
             </div>
           </div>
@@ -1030,11 +1030,11 @@
       }
     });
     
-    let htmlContent = `<strong style="color:var(--green-light); text-transform:uppercase; font-size:0.85rem; letter-spacing:1px; display:block; margin-bottom:1rem;">Your Custom Battle-Deck:</strong>`;
+    let htmlContent = `<strong style="color:var(--green-light); text-transform:uppercase; font-size:0.85rem; letter-spacing:1px; display:block; margin-bottom:1rem;">Custom Deck:</strong>`;
     
     if(chosenConsequences.length > 0) {
       htmlContent += `<div style="margin-bottom:1.25rem;">
-        <span style="color:#c97070; font-family:'Bebas Neue', sans-serif; letter-spacing:1px; font-size:1.1rem; display:block; margin-bottom:0.5rem;">Consequences</span>
+        <span style="color:#c97070; font-family:'Bebas Neue', sans-serif; letter-spacing:1px; font-size:1.1rem; display:block; margin-bottom:0.5rem;">Consequence Cards</span>
         <div class="output-tag-list">`;
       chosenConsequences.forEach(card => {
         htmlContent += `<span class="output-tag-item consequence-style">${card}</span>`;
@@ -1044,7 +1044,7 @@
     
     if(chosenRewards.length > 0) {
       htmlContent += `<div>
-        <span style="color:var(--green-light); font-family:'Bebas Neue', sans-serif; letter-spacing:1px; font-size:1.1rem; display:block; margin-bottom:0.5rem;">Rewards</span>
+        <span style="color:var(--green-light); font-family:'Bebas Neue', sans-serif; letter-spacing:1px; font-size:1.1rem; display:block; margin-bottom:0.5rem;">Reward Cards</span>
         <div class="output-tag-list">`;
       chosenRewards.forEach(card => {
         htmlContent += `<span class="output-tag-item reward-style">${card}</span>`;
@@ -1066,15 +1066,38 @@
     let shuffled = [...pool].sort(() => 0.5 - Math.random());
     let selected = shuffled.slice(0, Math.min(limit, shuffled.length));
     
-    let htmlContent = `<strong style="color:var(--green-light); text-transform:uppercase; font-size:0.85rem; letter-spacing:1px; display:block; margin-bottom:1rem;">Random Generated Pool:</strong><div class="output-tag-list">`;
+    let randomConsequences = [];
+    let randomRewards = [];
     
     selected.forEach(card => {
-      let isConsequence = consequenceCards.includes(card);
-      let styleClass = isConsequence ? 'consequence-style' : 'reward-style';
-      htmlContent += `<span class="output-tag-item ${styleClass}">${card}</span>`;
+      if (consequenceCards.includes(card)) {
+        randomConsequences.push(card);
+      } else {
+        randomRewards.push(card);
+      }
     });
     
-    htmlContent += `</div>`;
+    let htmlContent = `<strong style="color:var(--green-light); text-transform:uppercase; font-size:0.85rem; letter-spacing:1px; display:block; margin-bottom:1rem;">Randomised Deck:</strong>`;
+    
+    if(randomConsequences.length > 0) {
+      htmlContent += `<div style="margin-bottom:1.25rem;">
+        <span style="color:#c97070; font-family:'Bebas Neue', sans-serif; letter-spacing:1px; font-size:1.1rem; display:block; margin-bottom:0.5rem;">Consequence Cards</span>
+        <div class="output-tag-list">`;
+      randomConsequences.forEach(card => {
+        htmlContent += `<span class="output-tag-item consequence-style">${card}</span>`;
+      });
+      htmlContent += `</div></div>`;
+    }
+    
+    if(randomRewards.length > 0) {
+      htmlContent += `<div>
+        <span style="color:var(--green-light); font-family:'Bebas Neue', sans-serif; letter-spacing:1px; font-size:1.1rem; display:block; margin-bottom:0.5rem;">Reward Cards</span>
+        <div class="output-tag-list">`;
+      randomRewards.forEach(card => {
+        htmlContent += `<span class="output-tag-item reward-style">${card}</span>`;
+      });
+      htmlContent += `</div></div>`;
+    }
     
     displayBox.style.display = 'block';
     displayBox.innerHTML = htmlContent;
