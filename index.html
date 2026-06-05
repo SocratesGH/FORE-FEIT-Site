@@ -400,7 +400,6 @@
     margin: 0 0 0.5rem;
     text-transform: uppercase;
     opacity: 0.9;
-    color: var(--white);
   }
 
   .selector-grid {
@@ -409,39 +408,6 @@
     gap: 0.75rem;
     border-radius: 6px;
     padding: 1rem;
-  }
-
-  /* Black on Black Theme Configuration for Custom Build Subsection Wrapper */
-  .custom-section-wrapper {
-    background: #0f0f0f;
-    padding: 1.25rem;
-    border-radius: 6px;
-    border: 1px solid #222;
-    margin-bottom: 1.5rem;
-  }
-
-  .custom-grid-bg {
-    background: #141414;
-    border: 1px solid #222;
-  }
-
-  .custom-grid-bg .selector-item {
-    background: #1e1e1e;
-    border: 1px solid #333;
-    color: var(--white);
-  }
-  .custom-grid-bg .selector-item:hover { background: #262626; border-color: #444; }
-  
-  .consequence-grid-bg .selector-item.selected { 
-    border-color: #8c3535; 
-    background: #2a1616;
-    color: #e59999;
-  }
-
-  .reward-grid-bg .selector-item.selected { 
-    border-color: var(--green-light); 
-    background: #1b2e0b;
-    color: #a3d96c;
   }
 
   .selector-item {
@@ -457,6 +423,68 @@
   }
   
   .selector-item input { display: none; }
+
+  /* --- THEME WRAPPERS FOR BUILDER --- */
+
+  /* Consequences: Black on Black */
+  .wrapper-consequence {
+    background: #0f0f0f;
+    padding: 1.25rem;
+    border-radius: 6px;
+    border: 1px solid #222;
+    margin-bottom: 1.5rem;
+  }
+  .wrapper-consequence .builder-subheading {
+    color: var(--white);
+  }
+  .bg-consequence {
+    background: #141414;
+    border: 1px solid #222;
+  }
+  .bg-consequence .selector-item {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    color: var(--white);
+  }
+  .bg-consequence .selector-item:hover {
+    background: #262626;
+    border-color: #444;
+  }
+  .bg-consequence .selector-item.selected {
+    border-color: #8c3535;
+    background: #2a1616;
+    color: #e59999;
+  }
+
+  /* Rewards: White on White */
+  .wrapper-reward {
+    background: #f0efe8;
+    padding: 1.25rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 1.5rem;
+  }
+  .wrapper-reward .builder-subheading {
+    color: #0f0f0f;
+  }
+  .bg-reward {
+    background: #e4e3dc;
+    border: 1px solid #bbb;
+  }
+  .bg-reward .selector-item {
+    background: #ffffff;
+    border: 1px solid #bbb;
+    color: #0f0f0f;
+  }
+  .bg-reward .selector-item:hover {
+    background: #fcfcfc;
+    border-color: #999;
+  }
+  .bg-reward .selector-item.selected {
+    border-color: var(--green);
+    background: #e2f0d9;
+    color: #0f0f0f;
+  }
 
   /* Outputted rounded layout styles */
   .output-tag-list {
@@ -787,17 +815,17 @@
           <p style="font-size:0.9rem; color:rgba(245,245,240,0.6); margin-bottom:1.5rem;">Select your individual game components. Selected cards display a clean colorful highlight accent.</p>
           
           <!-- Black-on-Black Consequence Section Wrapper -->
-          <div class="custom-section-wrapper">
+          <div class="custom-section-wrapper wrapper-consequence">
             <div class="builder-subheading">Consequence Cards</div>
-            <div class="selector-grid custom-grid-bg consequence-grid-bg" id="consequenceSelectorGrid">
+            <div class="selector-grid bg-consequence" id="consequenceSelectorGrid">
               <!-- JS inserts options dynamically -->
             </div>
           </div>
 
-          <!-- Black-on-Black Reward Section Wrapper -->
-          <div class="custom-section-wrapper">
+          <!-- White-on-White Reward Section Wrapper -->
+          <div class="custom-section-wrapper wrapper-reward">
             <div class="builder-subheading">Reward Cards</div>
-            <div class="selector-grid custom-grid-bg reward-grid-bg" id="rewardSelectorGrid">
+            <div class="selector-grid bg-reward" id="rewardSelectorGrid">
               <!-- JS inserts options dynamically -->
             </div>
           </div>
