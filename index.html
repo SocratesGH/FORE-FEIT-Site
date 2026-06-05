@@ -71,6 +71,7 @@
     color: var(--green-light);
   }
 
+  /* PAGE VISIBILITY CONTROL */
   .page { display: none; }
   .page.active { display: block; }
 
@@ -261,7 +262,7 @@
   }
 
   .card {
-    cursor:pointer;
+    cursor: pointer;
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.2s, border-color 0.2s;
@@ -447,6 +448,7 @@
   </ul>
 </nav>
 
+<!-- HOME PAGE -->
 <div id="home" class="page active">
   <div class="hero-black">
     <h1 class="hero-title">FORE<span>!</span>FEIT</h1>
@@ -458,7 +460,7 @@
       <p class="section-label">The Concept</p>
       <h2 class="section-title">How It Works</h2>
       <div class="section-body">
-        <p>FORE!FEIT is a card game played during your group's round of golf. Each card is tied to a common golfing event — when your golf shot triggers one of these events, you bared that card for each subsequent hole.</p>
+        <p>FORE!FEIT is a card game played during your group's round of golf. Each card is tied to a common golfing event — when your golf shot triggers one of these events, you bare that card for each subsequent hole.</p>
         <p>The only way to get rid of a card is for someone else to trigger the same event. The game rewards good play, punishes bad luck, and keeps every hole interesting.</p>
         <p>The rules are intentionally open-ended as every group plays differently. Use the guidelines as a starting point and make the game your own.</p>
       </div>
@@ -472,13 +474,13 @@
         <p>Want to place an order, have a question, or want to make a suggestion? Reach out — we'd love to hear from you.</p>
       </div>
       <div style="margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.25rem;">
-        <a href="tel:0733195999" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--white); opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
+        <a href="tel:0733195999" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--white); opacity: 0.85; transition: opacity 0.2s;">
           <div style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--green-dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--green-light);"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </div>
           <span style="font-size: 1.05rem; letter-spacing: 1px;">073 319 5999</span>
         </a>
-        <a href="mailto:monrevwpersonal@gmail.com" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--white); opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
+        <a href="mailto:monrevwpersonal@gmail.com" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--white); opacity: 0.85; transition: opacity 0.2s;">
           <div style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--green-dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--green-light);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
           </div>
@@ -489,9 +491,203 @@
   </div>
 </div>
 
+<!-- DECKS & CARDS PAGE -->
 <div id="cards" class="page">
   <section style="padding-top: 4rem;">
     <p class="section-label">The Decks</p>
     <h2 class="section-title">Two Decks, Many Possibilities</h2>
     <div class="section-body">
-      <p>FORE!FEIT comes in two decks — one for the bad moments and one for the good. Select a deck and a
+      <p>FORE!FEIT comes in two decks — one for the bad moments and one for the good. Select a deck and a card below to find out more information about it!</p>
+    </div>
+    <div style="margin-top: 2rem;">
+      <div class="deck-tabs" id="cards-tabs">
+        <button class="deck-tab black-tab active" onclick="switchPanel('cards', 'black', this)">Consequence Deck</button>
+        <button class="deck-tab white-tab" onclick="switchPanel('cards', 'white', this)">Reward Deck</button>
+      </div>
+      <div id="cards-panel-black" class="deck-panel black-panel active">
+        <div class="deck-panel-title">Consequence Cards</div>
+        <div class="card-grid">
+          <div class="card dark-card" onclick="openCardModal('Bunker Buster','consequence')">
+            <div class="card-img"><img src="images/bunker-buster.png" alt="Bunker Buster"></div>
+            <div class="card-body">
+              <div class="card-name">Bunker Buster</div>
+              <span class="card-tag negative">Consequence</span>
+            </div>
+          </div>
+          <div class="card dark-card" onclick="openCardModal('Splash Zone','consequence')">
+            <div class="card-img"><img src="images/splash-zone.png" alt="Splash Zone"></div>
+            <div class="card-body">
+              <div class="card-name">Splash Zone</div>
+              <span class="card-tag negative">Consequence</span>
+            </div>
+          </div>
+          <div class="card dark-card" onclick="openCardModal('Tree Hugger','consequence')">
+            <div class="card-img"><img src="images/tree-hugger.png" alt="Tree Hugger"></div>
+            <div class="card-body">
+              <div class="card-name">Tree Hugger</div>
+              <span class="card-tag negative">Consequence</span>
+            </div>
+          </div>
+          <div class="card dark-card" onclick="openCardModal('The Houdini','consequence')">
+            <div class="card-img"><img src="images/the-houdini.png" alt="The Houdini"></div>
+            <div class="card-body">
+              <div class="card-name">The Houdini</div>
+              <span class="card-tag negative">Consequence</span>
+            </div>
+          </div>
+          <div class="card dark-card" onclick="openCardModal('Bush Whacker','consequence')">
+            <div class="card-img"><img src="images/bush-whacker.png" alt="Bush Whacker"></div>
+            <div class="card-body">
+              <div class="card-name">Bush Whacker</div>
+              <span class="card-tag negative">Consequence</span>
+            </div>
+          </div>
+          <div class="card dark-card" onclick="openCardModal('Over Board','consequence')">
+            <div class="card-img"><img src="images/over-board.png" alt="Over Board"></div>
+            <div class="card-body">
+              <div class="card-name">Over Board</div>
+              <span class="card-tag negative">Consequence</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="cards-panel-white" class="deck-panel white-panel">
+        <div class="deck-panel-title">Reward Cards</div>
+        <div class="card-grid">
+          <div class="card light-card" onclick="openCardModal('Chip Tastic','reward')">
+            <div class="card-img"><img src="images/chip-tastic.png" alt="Chip Tastic"></div>
+            <div class="card-body">
+              <div class="card-name">Chip Tastic</div>
+              <span class="card-tag positive">Reward</span>
+            </div>
+          </div>
+          <div class="card light-card" onclick="openCardModal('Eager Eagle','reward')">
+            <div class="card-img"><img src="images/eager-eagle.png" alt="Eager Eagle"></div>
+            <div class="card-body">
+              <div class="card-name">Eager Eagle</div>
+              <span class="card-tag positive">Reward</span>
+            </div>
+          </div>
+          <div class="card light-card" onclick="openCardModal('Early Bird','reward')">
+            <div class="card-img"><img src="images/early-bird.png" alt="Early Bird"></div>
+            <div class="card-body">
+              <div class="card-name">Early Bird</div>
+              <span class="card-tag positive">Reward</span>
+            </div>
+          </div>
+          <div class="card light-card" onclick="openCardModal('Go Long','reward')">
+            <div class="card-img"><img src="images/go-long.png" alt="Go Long"></div>
+            <div class="card-body">
+              <div class="card-name">Go Long</div>
+              <span class="card-tag positive">Reward</span>
+            </div>
+          </div>
+          <div class="card light-card" onclick="openCardModal('Par Fection','reward')">
+            <div class="card-img"><img src="images/par-fection.png" alt="Par Fection"></div>
+            <div class="card-body">
+              <div class="card-name">Par Fection</div>
+              <span class="card-tag positive">Reward</span>
+            </div>
+          </div>
+          <div class="card light-card" onclick="openCardModal('The Ace','reward')">
+            <div class="card-img"><img src="images/the-ace.png" alt="The Ace"></div>
+            <div class="card-body">
+              <div class="card-name">The Ace</div>
+              <span class="card-tag positive">Reward</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- HOW TO PLAY PAGE -->
+<div id="ways" class="page">
+  <section style="padding-top: 4rem;">
+    <p class="section-label">Gameplay</p>
+    <h2 class="section-title">How to Play</h2>
+    <div class="section-body">
+      <p>FORE!FEIT is designed to be flexible. Select a deck below for a guide on how to play, being sure to add your own spin on it if you please!</p>
+    </div>
+    <div style="margin-top: 2rem;">
+      <div class="deck-tabs" id="ways-tabs">
+        <button class="deck-tab black-tab active" onclick="switchPanel('ways', 'black', this)">Consequence Deck</button>
+        <button class="deck-tab white-tab" onclick="switchPanel('ways', 'white', this)">Reward Deck</button>
+      </div>
+      <div id="ways-panel-black" class="deck-panel black-panel active">
+        <div class="panel-subheading">How to Play</div>
+        <div class="coming-soon-box">Coming Soon</div>
+        <div class="panel-subheading">Possible Forfeits</div>
+        <div class="coming-soon-box">Coming Soon</div>
+      </div>
+      <div id="ways-panel-white" class="deck-panel white-panel">
+        <div class="panel-subheading">How to Play</div>
+        <div class="coming-soon-box">Coming Soon</div>
+        <div class="panel-subheading">Randomiser</div>
+        <div style="margin:20px 0;">
+          <select id="gameMode"><option>Consequences</option><option>Rewards</option><option>Mixed</option></select>
+          <input id="cardCount" type="number" min="1" max="12" value="4">
+          <button onclick="generateSession()">Generate</button>
+          <button onclick="downloadSession()">Download PNG</button>
+          <div id="randomResults" style="margin-top:15px;"></div>
+        </div>
+        <div class="panel-subheading">Possible Rewards</div>
+        <div class="coming-soon-box">Coming Soon</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FAQ PAGE -->
+<div id="faq" class="page">
+  <section style="padding-top:4rem;">
+    <p class="section-label">FAQ</p>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="section-body">
+      <p><strong>How many cards should we use?</strong></p>
+      <p>Add as many as your group enjoys.</p>
+      <p><strong>Can we create our own forfeits?</strong></p>
+      <p>Absolutely.</p>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <span>FORE!FEIT</span> &nbsp;·&nbsp; The Golf Card Game
+</footer>
+
+<!-- NAVIGATION & SCRIPT CONTROL -->
+<script>
+  function showPage(id, el) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function switchPanel(page, deck, btn) {
+    document.getElementById(page + '-panel-black').classList.remove('active');
+    document.getElementById(page + '-panel-white').classList.remove('active');
+    document.getElementById(page + '-panel-' + deck).classList.add('active');
+    
+    const tabs = document.querySelectorAll('#' + page + '-tabs .deck-tab');
+    tabs.forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+  }
+</script>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script>
+  const consequenceCards=['Bunker Buster','Bush Whacker','Splash Zone','The Houdini','Tree Hugger','Over Board'];
+  const rewardCards=['Chip Tastic','Eager Eagle','Early Bird','Go Long','Par Fection','The Ace'];
+  
+  function openCardModal(n,t){
+    alert("Card Selected: " + n); 
+  }
+  function generateSession(){let m=document.getElementById('gameMode').value,c=parseInt(document.getElementById('cardCount').value);let pool=m==='Consequences'?consequenceCards:m==='Rewards'?rewardCards:consequenceCards.concat(rewardCards);let res=[];for(let i=0;i<Math.min(c,pool.length);i++){res.push(pool.sort(()=>0.5-Math.random())[0]);}document.getElementById('randomResults').innerHTML=res.join('<br>');}
+  function downloadSession(){html2canvas(document.getElementById('randomResults')).then(canvas=>{let a=document.createElement('a');a.download='forefeit-session.png';a.href=canvas.toDataURL();a.click();});}
+</script>
+</body>
+</html>
