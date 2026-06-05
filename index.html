@@ -312,4 +312,186 @@
   .light-card .card-trigger { color: var(--green); }
 
   .card-desc { font-size: 0.85rem; line-height: 1.6; }
-  .dark-card
+  .dark-card .card-desc { color: rgba(245,245,240,0.5); }
+  .light-card .card-desc { color: #555; }
+
+  .card-tag {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .card-tag.negative { border: 1px solid #4a1a1a; color: #c97070; }
+  .card-tag.positive { border: 1px solid var(--green-dark); color: var(--green); }
+
+  /* HOW TO PLAY — coming soon panels */
+  .coming-soon-box {
+    margin-top: 1.5rem;
+    padding: 2rem;
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .black-panel .coming-soon-box {
+    background: #1a1a1a;
+    border: 1px dashed #333;
+    color: rgba(245,245,240,0.35);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .white-panel .coming-soon-box {
+    background: #e0dfd8;
+    border: 1px dashed #bbb;
+    color: rgba(0,0,0,0.3);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* FORFEIT LIST */
+  .forfeit-list {
+    list-style: none;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .black-panel .forfeit-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: rgba(245,245,240,0.65);
+    line-height: 1.6;
+  }
+
+  .white-panel .forfeit-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: #e0dfd8;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.6;
+  }
+
+  .forfeit-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .black-panel .forfeit-dot { background: var(--green-light); }
+  .white-panel .forfeit-dot { background: var(--green); }
+
+  .panel-subheading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    margin: 2rem 0 0.5rem;
+  }
+
+  .black-panel .panel-subheading { color: var(--white); }
+  .white-panel .panel-subheading { color: #0f0f0f; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--green-dark);
+    font-size: 0.8rem;
+    color: rgba(245,245,240,0.25);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--black);
+  }
+
+  footer span { color: var(--green-light); }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.75rem; }
+    .hero-black { padding: 3rem 1.25rem 2.5rem; }
+    .hero-white { padding: 3rem 1.25rem; }
+    section { padding: 3rem 1.25rem; }
+    .black-panel, .white-panel { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">FORE<span>!</span>FEIT</div>
+  <ul class="nav-links">
+    <li><a href="#" class="active" onclick="showPage('home', this)">Home</a></li>
+    <li><a href="#" onclick="showPage('cards', this)">Decks</a></li>
+    <li><a href="#" onclick="showPage('ways', this)">Guide</a></li>
+    <li><a href="#" onclick="showPage('faq', this)">FAQ</a></li>
+  </ul>
+</nav>
+
+<div id="home" class="page active">
+  <div class="hero-black">
+    <h1 class="hero-title">FORE<span>!</span>FEIT</h1>
+    <p class="hero-tagline">Excite Your Golf Game</p>
+  </div>
+  <div class="hero-divider-bar"></div>
+  <div class="hero-white">
+    <div class="hero-white-inner">
+      <p class="section-label">The Concept</p>
+      <h2 class="section-title">How It Works</h2>
+      <div class="section-body">
+        <p>FORE!FEIT is a card game played during your group's round of golf. Each card is tied to a common golfing event — when your golf shot triggers one of these events, you bared that card for each subsequent hole.</p>
+        <p>The only way to get rid of a card is for someone else to trigger the same event. The game rewards good play, punishes bad luck, and keeps every hole interesting.</p>
+        <p>The rules are intentionally open-ended as every group plays differently. Use the guidelines as a starting point and make the game your own.</p>
+      </div>
+    </div>
+  </div>
+  <div class="hero-black" style="min-height: auto; padding: 5rem 2rem;">
+    <div style="max-width: 900px; width: 100%; text-align: left; position: relative;">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="section-body" style="margin-top: 1rem;">
+        <p>Want to place an order, have a question, or want to make a suggestion? Reach out — we'd love to hear from you.</p>
+      </div>
+      <div style="margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.25rem;">
+        <a href="tel:0733195999" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--white); opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
+          <div style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--green-dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--green-light);"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <span style="font-size: 1.05rem; letter-spacing: 1px;">073 319 5999</span>
+        </a>
+        <a href="mailto:monrevwpersonal@gmail.com" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--white); opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
+          <div style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--green-dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--green-light);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+          </div>
+          <span style="font-size: 1.05rem; letter-spacing: 1px;">monrevwpersonal@gmail.com</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="cards" class="page">
+  <section style="padding-top: 4rem;">
+    <p class="section-label">The Decks</p>
+    <h2 class="section-title">Two Decks, Many Possibilities</h2>
+    <div class="section-body">
+      <p>FORE!FEIT comes in two decks — one for the bad moments and one for the good. Select a deck and a
