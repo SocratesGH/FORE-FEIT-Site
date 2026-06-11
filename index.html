@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FORE!FEIT</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas Neue&family=Barlow:wght=400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght=400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --black: #0f0f0f;
@@ -48,7 +48,6 @@
 
   .nav-logo span { color: var(--green-light); }
 
-  /* Dropdown Selector Styling */
   .nav-dropdown-container {
     position: relative;
     display: inline-block;
@@ -90,7 +89,6 @@
   .page { display: none; }
   .page.active { display: block; }
 
-  /* HERO UNITS */
   .hero-black {
     background: var(--black);
     min-height: 60vh;
@@ -153,7 +151,6 @@
     background: linear-gradient(to right, transparent, var(--green), transparent);
   }
 
-  /* SECTIONS */
   section {
     padding: 5rem 2rem;
     max-width: 900px;
@@ -190,7 +187,6 @@
 
   .section-body p + p { margin-top: 1rem; }
 
-  /* DECK TOGGLE TABS */
   .deck-tabs {
     display: flex;
     width: 100%;
@@ -246,7 +242,6 @@
     padding: 2.5rem;
   }
 
-  /* CARD GRID */
   .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -308,12 +303,9 @@
     font-weight: 600;
   }
 
-  /* Consequence Tag: Black and Red */
   .card-tag.negative { border: 1px solid #4a1a1a; color: #c97070; background: #000; }
-  /* Reward Tag: White and Green */
   .card-tag.positive { border: 1px solid var(--green); color: var(--green); background: #ffffff; }
 
-  /* TOOL CONTAINER */
   .tool-container {
     background: #141414;
     border: 1px solid #222;
@@ -395,7 +387,6 @@
     line-height: 1.8;
   }
 
-  /* BUILDER SUBHEADINGS */
   .builder-subheading {
     font-family: 'Bebas Neue', sans-serif;
     letter-spacing: 1px;
@@ -427,9 +418,6 @@
   
   .selector-item input { display: none; }
 
-  /* --- THEME WRAPPERS FOR BUILDER --- */
-
-  /* Consequences: Black on Black */
   .wrapper-consequence {
     background: #0f0f0f;
     padding: 1.25rem;
@@ -459,7 +447,6 @@
     color: #e59999;
   }
 
-  /* Rewards: White on White */
   .wrapper-reward {
     background: #f0efe8;
     padding: 1.25rem;
@@ -489,631 +476,4 @@
     color: #0f0f0f;
   }
 
-  /* Outputted rounded layout styles */
-  .output-tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-  }
-
-  .output-tag-item {
-    display: inline-block;
-    padding: 0.4rem 1rem;
-    font-size: 0.9rem;
-    border-radius: 20px;
-    font-weight: 500;
-  }
-  
-  .output-tag-item.consequence-style {
-    background: #000000;
-    color: #c97070;
-    border: 1px solid #4a1a1a;
-  }
-
-  .output-tag-item.reward-style {
-    background: #ffffff;
-    color: var(--green);
-    border: 1px solid var(--green);
-  }
-
-  /* GAMEPLAY FLOW LIST */
-  .flow-list {
-    list-style: none;
-    margin-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .flow-step {
-    background: #141414;
-    border: 1px solid #222;
-    border-left: 4px solid var(--green-light);
-    padding: 1.25rem 1.5rem;
-    border-radius: 0 4px 4px 0;
-  }
-
-  .flow-step h4 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.3rem;
-    letter-spacing: 1px;
-    color: var(--white);
-    margin-bottom: 0.25rem;
-  }
-
-  .flow-step p {
-    font-size: 0.95rem;
-    color: rgba(245,245,240,0.65);
-  }
-
-  /* DETAILED STANDALONE VIEW */
-  .detail-card-view {
-    max-width: 600px;
-    margin: 4rem auto;
-    background: #141414;
-    border: 1px solid #222;
-    border-radius: 12px;
-    overflow: hidden;
-  }
-  .detail-header {
-    padding: 2rem;
-    border-bottom: 1px solid #222;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .detail-header h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5rem;
-    letter-spacing: 1px;
-  }
-  .detail-body {
-    padding: 2rem;
-  }
-  .detail-image-box {
-    width: 100%;
-    aspect-ratio: 3/4;
-    background: #222;
-    margin-bottom: 1.5rem;
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  .detail-image-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  /* FOOTER */
-  footer {
-    text-align: center;
-    padding: 3rem 2rem;
-    border-top: 1px solid var(--green-dark);
-    font-size: 0.8rem;
-    color: rgba(245,240,240,0.25);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    background: var(--black);
-  }
-
-  footer span { color: var(--green-light); }
-
-  @media (max-width: 600px) {
-    nav { padding: 0 1rem; }
-    .black-panel, .white-panel, .tool-container { padding: 1.5rem; }
-  }
-</style>
-</head>
-<body>
-
-<nav>
-  <div class="nav-logo">FORE<span>!</span>FEIT</div>
-  <div class="nav-dropdown-container">
-    <select class="nav-select" id="pageSelector" onchange="handleDropdownNavigation(this.value)">
-      <option value="home">Home</option>
-      <option value="cards">Decks</option>
-      <option value="ways">Guide</option>
-      <option value="faq">FAQ</option>
-    </select>
-  </div>
-</nav>
-
-<!-- HOME PAGE -->
-<div id="home" class="page active">
-  <div class="hero-black">
-    <h1 class="hero-title">FORE<span>!</span>FEIT</h1>
-    <p class="hero-tagline">Excite Your Golf Game</p>
-  </div>
-  <div class="hero-divider-bar"></div>
-  <div class="hero-white">
-    <div class="hero-white-inner">
-      <p class="section-label">The Concept</p>
-      <h2 class="section-title">How It Works</h2>
-      <div class="section-body">
-        <p>FORE!FEIT is a card game played during your group's round of golf. Each card is tied to a common golfing event — when your golf shot triggers one of these events, you bare that card for each subsequent hole.</p>
-        <p>The only way to get rid of a card is for someone else to trigger the same event. The game rewards good play, punishes bad luck, and keeps every hole interesting.</p>
-        <p>The rules are intentionally open-ended as every group plays differently. Use the guidelines as a starting point and make the game your own.</p>
-      </div>
-    </div>
-  </div>
-  <div class="hero-black" style="min-height: auto; padding: 5rem 2rem;">
-    <div style="max-width: 900px; width: 100%; text-align: left; position: relative;">
-      <p class="section-label">Contact</p>
-      <h2 class="section-title">Get In Touch</h2>
-      <div class="section-body" style="margin-top: 1rem;">
-        <p>Want to place an order, have a question, or want to make a suggestion? Reach out — we'd love to hear from you.</p>
-      </div>
-      <div style="margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.25rem;">
-        <a href="tel:0733195999" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--white); opacity: 0.85; transition: opacity 0.2s;">
-          <div style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--green-dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--green-light);"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </div>
-          <span style="font-size: 1.05rem; letter-spacing: 1px;">073 319 5999</span>
-        </a>
-        <a href="mailto:monrevwpersonal@gmail.com" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--white); opacity: 0.85; transition: opacity 0.2s;">
-          <div style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--green-dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--green-light);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
-          </div>
-          <span style="font-size: 1.05rem; letter-spacing: 1px;">monrevwpersonal@gmail.com</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- DECKS & CARDS PAGE -->
-<div id="cards" class="page">
-  <section style="padding-top: 4rem;">
-    <p class="section-label">The Decks</p>
-    <h2 class="section-title">Two Decks, Many Possibilities</h2>
-    <div class="section-body">
-      <p>FORE!FEIT comes in two decks — one for the bad moments and one for the good. Select a card below to enter its standalone detail page view.</p>
-    </div>
-    <div style="margin-top: 2rem;">
-      <div class="deck-tabs" id="cards-tabs">
-        <button class="deck-tab black-tab active" onclick="switchPanel('cards', 'black', this)">Consequence Deck</button>
-        <button class="deck-tab white-tab" onclick="switchPanel('cards', 'white', this)">Reward Deck</button>
-      </div>
-      
-      <!-- Consequence Cards Panel -->
-      <div id="cards-panel-black" class="deck-panel black-panel active">
-        <div class="card-grid">
-          <div class="card dark-card" onclick="loadCardDetail('Bunker Buster', 'Consequence', 'images/bunker-buster.png', 'Triggered when your ball lands directly in a sand trap bunker. Must maintain penalty until someone else drops it in the sand.')">
-            <div class="card-img"><img src="images/bunker-buster.png" alt="Bunker Buster"></div>
-            <div class="card-body">
-              <div class="card-name">Bunker Buster</div>
-              <span class="card-tag negative">Consequence</span>
-            </div>
-          </div>
-          <div class="card dark-card" onclick="loadCardDetail('Splash Zone', 'Consequence', 'images/splash-zone.png', 'Triggered when hitting your ball straight into a body of water or lateral hazard.')">
-            <div class="card-img"><img src="images/splash-zone.png" alt="Splash Zone"></div>
-            <div class="card-body">
-              <div class="card-name">Splash Zone</div>
-              <span class="card-tag negative">Consequence</span>
-            </div>
-          </div>
-          <div class="card dark-card" onclick="loadCardDetail('Tree Hugger', 'Consequence', 'images/tree-hugger.png', 'Triggered upon making direct contact with a tree trunk or becoming significantly blocked by branches.')">
-            <div class="card-img"><img src="images/tree-hugger.png" alt="Tree Hugger"></div>
-            <div class="card-body">
-              <div class="card-name">Tree Hugger</div>
-              <span class="card-tag negative">Consequence</span>
-            </div>
-          </div>
-          <div class="card dark-card" onclick="loadCardDetail('The Houdini', 'Consequence', 'images/the-houdini.png', 'Triggered when failing to escape a hazard or bunker setup on your first attempt.')">
-            <div class="card-img"><img src="images/the-houdini.png" alt="The Houdini"></div>
-            <div class="card-body">
-              <div class="card-name">The Houdini</div>
-              <span class="card-tag negative">Consequence</span>
-            </div>
-          </div>
-          <div class="card dark-card" onclick="loadCardDetail('Bush Whacker', 'Consequence', 'images/bush-whacker.png', 'Triggered by sailing deep into heavy rough, brush, or complex undergrowth vegetation.')">
-            <div class="card-img"><img src="images/bush-whacker.png" alt="Bush Whacker"></div>
-            <div class="card-body">
-              <div class="card-name">Bush Whacker</div>
-              <span class="card-tag negative">Consequence</span>
-            </div>
-          </div>
-          <div class="card dark-card" onclick="loadCardDetail('Over Board', 'Consequence', 'images/fence-hopper.png', 'Triggered by blasting a golf ball completely Out of Bounds (white stakes).')">
-            <div class="card-img"><img src="images/fence-hopper.png" alt="Fence Hopper"></div>
-            <div class="card-body">
-              <div class="card-name">Fence Hopper</div>
-              <span class="card-tag negative">Consequence</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Reward Cards Panel -->
-      <div id="cards-panel-white" class="deck-panel white-panel">
-        <div class="card-grid">
-          <div class="card light-card" onclick="loadCardDetail('Chip "'"n Dip', 'Reward', 'images/chip-'n-dip.png', 'Triggered when chipping in directly from off the putting surface green area.')">
-            <div class="card-img"><img src="images/chip-'n-dip.png" alt="Chip "'"n Dip></div>
-            <div class="card-body">
-              <div class="card-name">Chip Tastic</div>
-              <span class="card-tag positive">Reward</span>
-            </div>
-          </div>
-          <div class="card light-card" onclick="loadCardDetail('Eager Eagle', 'Reward', 'images/eager-eagle.png', 'Triggered by scoring a stunning 2 strokes under par on any single hole layout.')">
-            <div class="card-img"><img src="images/eager-eagle.png" alt="Eager Eagle"></div>
-            <div class="card-body">
-              <div class="card-name">Eager Eagle</div>
-              <span class="card-tag positive">Reward</span>
-            </div>
-          </div>
-          <div class="card light-card" onclick="loadCardDetail('Early Bird', 'Reward', 'images/early-bird.png', 'Triggered by securing a classic Birdie score frame (1 under par).')">
-            <div class="card-img"><img src="images/early-bird.png" alt="Early Bird"></div>
-            <div class="card-body">
-              <div class="card-name">Early Bird</div>
-              <span class="card-tag positive">Reward</span>
-            </div>
-          </div>
-          <div class="card light-card" onclick="loadCardDetail('Go Long', 'Reward', 'images/go-long.png', 'Triggered by crushing the absolute longest verified fairway drive in your group dynamic.')">
-            <div class="card-img"><img src="images/go-long.png" alt="Go Long"></div>
-            <div class="card-body">
-              <div class="card-name">Go Long</div>
-              <span class="card-tag positive">Reward</span>
-            </div>
-          </div>
-          <div class="card light-card" onclick="loadCardDetail('Par Fection', 'Reward', 'images/par-fection.png', 'Triggered upon sinking an elusive even-par baseline stroke finish sequence.')">
-            <div class="card-img"><img src="images/par-fection.png" alt="Par Fection"></div>
-            <div class="card-body">
-              <div class="card-name">Par Fection</div>
-              <span class="card-tag positive">Reward</span>
-            </div>
-          </div>
-          <div class="card light-card" onclick="loadCardDetail('The Ace', 'Reward', 'images/the-ace.png', 'Triggered by sinking a legendary, historic Hole-in-One master stroke!')">
-            <div class="card-img"><img src="images/the-ace.png" alt="The Ace"></div>
-            <div class="card-body">
-              <div class="card-name">The Ace</div>
-              <span class="card-tag positive">Reward</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- DETAILED STANDALONE CARD VIEW PAGE -->
-<div id="card-detail-view" class="page">
-  <section style="padding-top: 2rem;">
-    <button class="tool-btn secondary" onclick="returnToDecks()">&larr; Return to Decks</button>
-    
-    <div class="detail-card-view">
-      <div class="detail-header">
-        <h2 id="dtTitle" style="font-family: 'Bebas Neue', sans-serif;">Card Name</h2>
-        <span id="dtTag" class="card-tag">Tag</span>
-      </div>
-      <div class="detail-body">
-        <div class="detail-image-box">
-          <img id="dtImg" src="" alt="Card Display">
-        </div>
-        <p id="dtDesc" style="color: rgba(245,245,240,0.8); font-size: 1.1rem;"></p>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- GUIDE: BUILDING A DECK & GAMEPLAY FLOW PAGE -->
-<div id="ways" class="page">
-  <section style="padding-top: 4rem;">
-    <p class="section-label">Setup Guide</p>
-    <h2 class="section-title">Choosing Cards</h2>
-    <div class="section-body">
-      <p>Before teeing off, your group needs to decide which matches and dynamics you want to introduce to the course. Select either the Custom or Random configuration below to design your pool.</p>
-    </div>
-
-    <div style="margin-top: 3rem;">
-      <div class="deck-tabs" id="builder-tabs">
-        <button class="deck-tab black-tab active" onclick="switchPanel('builder', 'black', this)">Custom Deck</button>
-        <button class="deck-tab black-tab" onclick="switchPanel('builder', 'white', this)">Random Deck</button>
-      </div>
-
-      <!-- Custom Deck Builder Subsection Panel -->
-      <div id="builder-panel-black" class="deck-panel active">
-        <div class="tool-container">
-          <p class="section-label" style="font-size:0.75rem; margin-bottom:0.5rem;">Deck Building</p>
-          <h3 style="font-family:'Bebas Neue', sans-serif; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem; color:var(--white);">Build Your Own</h3>
-          <p style="font-size:0.9rem; color:rgba(245,245,240,0.6); margin-bottom:1.5rem;">Select your individual game components. Selected cards display a clean colorful highlight accent.</p>
-          
-          <!-- Black-on-Black Consequence Section Wrapper -->
-          <div class="custom-section-wrapper wrapper-consequence">
-            <div class="builder-subheading">Consequence Cards</div>
-            <div class="selector-grid bg-consequence" id="consequenceSelectorGrid">
-              <!-- JS inserts options dynamically -->
-            </div>
-          </div>
-
-          <!-- White-on-White Reward Section Wrapper -->
-          <div class="custom-section-wrapper wrapper-reward">
-            <div class="builder-subheading">Reward Cards</div>
-            <div class="selector-grid bg-reward" id="rewardSelectorGrid">
-              <!-- JS inserts options dynamically -->
-            </div>
-          </div>
-          
-          <div class="tool-btn-group" style="margin-top: 2rem;">
-            <button class="tool-btn" onclick="generateCustomSession()">Create Deck</button>
-            <button class="tool-btn secondary" onclick="downloadSession('customResults')">Download PNG</button>
-          </div>
-          <div id="customResults" class="results-box" style="margin-top:1.5rem; display:none;"></div>
-        </div>
-      </div>
-
-      <!-- Randomizer Subsection Panel -->
-      <div id="builder-panel-white" class="deck-panel">
-        <div class="tool-container">
-          <p class="section-label" style="font-size:0.75rem; margin-bottom:0.5rem;">Deck Building</p>
-          <h3 style="font-family:'Bebas Neue', sans-serif; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem;">Randomize the Game</h3>
-          
-          <div class="tool-grid">
-            <div class="tool-field">
-              <label for="gameMode">Gamemode</label>
-              <select id="gameMode" class="tool-input">
-                <option value="Consequences">Consequence Cards Only</option>
-                <option value="Rewards">Reward Cards Only</option>
-                <option value="Mixed">Mixed Deck Match</option>
-              </select>
-            </div>
-            <div class="tool-field">
-              <label for="cardCount">Number of Cards</label>
-              <input id="cardCount" type="number" class="tool-input" min="1" max="12" value="4">
-            </div>
-          </div>
-          
-          <div class="tool-btn-group">
-            <button class="tool-btn" onclick="generateRandomSession()">Create Deck</button>
-            <button class="tool-btn secondary" onclick="downloadSession('randomResults')">Download PNG</button>
-          </div>
-          
-          <div id="randomResults" class="results-box" style="margin-top:1.5rem; display:none;"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Gameplay Flow Section -->
-  <section>
-    <p class="section-label">Round Mechanics</p>
-    <h2 class="section-title">Gameplay Flow</h2>
-    <div class="section-body">
-      <p>Once your pool or hand is decided, follow this operational workflow throughout your matching play:</p>
-      
-      <div class="flow-list">
-        <div class="flow-step">
-          <h4>Step 1: Draw and Unveil</h4>
-          <p>Bring your compiled Custom or Random session printout/digital file to the first tee box. Ensure all players recognize the active event cards.</p>
-        </div>
-        <div class="flow-step">
-          <h4>Step 2: Triggering an Event</h4>
-          <p>As soon as a player hits a shot that matches an active card criteria (e.g., hitting a water hazard or landing a perfect chip), they instantly assume custody of that card.</p>
-        </div>
-        <div class="flow-step">
-          <h4>Step 3: Carrying the Penalty/Reward</h4>
-          <p>The card owner is bound by that action/condition for each subsequent hole until the condition is broken or transferred.</p>
-        </div>
-        <div class="flow-step">
-          <h4>Step 4: Transference & Mitigation</h4>
-          <p>To discard a card, another player in your group must trigger that exact same event context. The card then shifts over to the new player instantly.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- FAQ PAGE -->
-<div id="faq" class="page">
-  <section style="padding-top:4rem;">
-    <p class="section-label">FAQ</p>
-    <h2 class="section-title">Frequently Asked Questions</h2>
-    <div class="section-body">
-      <p><strong>How many cards should we use?</strong></p>
-      <p>Add as many as your group enjoys.</p>
-      <p><strong>Can we create our own forfeits?</strong></p>
-      <p>Absolutely.</p>
-    </div>
-  </section>
-</div>
-
-<footer>
-  <span>FORE!FEIT</span> &nbsp;·&nbsp; The Golf Card Game
-</footer>
-
-<!-- CORE APPLICATION LOGIC -->
-<script>
-  function handleDropdownNavigation(pageId) {
-    showPage(pageId, null);
-  }
-
-  function showPage(id, el) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    
-    const selector = document.getElementById('pageSelector');
-    if (selector && selector.value !== id) {
-      selector.value = id;
-    }
-    
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function switchPanel(page, deck, btn) {
-    document.getElementById(page + '-panel-black').classList.remove('active');
-    document.getElementById(page + '-panel-white').classList.remove('active');
-    document.getElementById(page + '-panel-' + deck).classList.add('active');
-    
-    const tabs = document.querySelectorAll('#' + page + '-tabs .deck-tab, #' + page + '-tabs button, [id^="' + page + '-tabs"] button');
-    tabs.forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
-  }
-
-  function loadCardDetail(name, tag, imgUrl, description) {
-    document.getElementById('dtTitle').innerText = name;
-    document.getElementById('dtTag').innerText = tag;
-    document.getElementById('dtDesc').innerText = description;
-    document.getElementById('dtImg').src = imgUrl;
-    
-    const tagEl = document.getElementById('dtTag');
-    if(tag === 'Consequence') {
-      tagEl.className = 'card-tag negative';
-    } else {
-      tagEl.className = 'card-tag positive';
-    }
-    
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('card-detail-view').classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function returnToDecks() {
-    showPage('cards', null);
-  }
-</script>
-
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-<script>
-  const consequenceCards = ['Bunker Buster', 'Bush Whacker', 'Splash Zone', 'The Houdini', 'Tree Hugger', 'Over Board'];
-  const rewardCards = ['Chip Tastic', 'Eager Eagle', 'Early Bird', 'Go Long', 'Par Fection', 'The Ace'];
-
-  window.addEventListener('DOMContentLoaded', () => {
-    const consequenceGrid = document.getElementById('consequenceSelectorGrid');
-    const rewardGrid = document.getElementById('rewardSelectorGrid');
-    
-    consequenceCards.forEach(card => {
-      const label = document.createElement('label');
-      label.className = 'selector-item';
-      label.innerHTML = `
-        <input type="checkbox" value="${card}" data-type="consequence" onchange="toggleCardSelect(this)">
-        <span>${card}</span>
-      `;
-      consequenceGrid.appendChild(label);
-    });
-
-    rewardCards.forEach(card => {
-      const label = document.createElement('label');
-      label.className = 'selector-item';
-      label.innerHTML = `
-        <input type="checkbox" value="${card}" data-type="reward" onchange="toggleCardSelect(this)">
-        <span>${card}</span>
-      `;
-      rewardGrid.appendChild(label);
-    });
-  });
-
-  function toggleCardSelect(checkbox) {
-    if(checkbox.checked) {
-      checkbox.parentElement.classList.add('selected');
-    } else {
-      checkbox.parentElement.classList.remove('selected');
-    }
-  }
-
-  function generateCustomSession() {
-    const checkedBoxes = document.querySelectorAll('#builder-panel-black input:checked');
-    const displayBox = document.getElementById('customResults');
-    
-    if(checkedBoxes.length === 0) {
-      displayBox.style.display = 'block';
-      displayBox.innerHTML = '<span style="color:#c97070;">Please choose at least one card to build your session.</span>';
-      return;
-    }
-    
-    let chosenConsequences = [];
-    let chosenRewards = [];
-    
-    checkedBoxes.forEach(box => {
-      if(box.getAttribute('data-type') === 'consequence') {
-        chosenConsequences.push(box.value);
-      } else {
-        chosenRewards.push(box.value);
-      }
-    });
-    
-    let htmlContent = `<strong style="color:#ffffff; font-family:'Bebas Neue', sans-serif; text-transform:uppercase; font-size:1.4rem; letter-spacing:1px; display:block; margin-bottom:1rem;">Custom Deck:</strong>`;
-    
-    if(chosenConsequences.length > 0) {
-      htmlContent += `<div style="margin-bottom:1.25rem;">
-        <span style="color:#c97070; font-family:'Bebas Neue', sans-serif; letter-spacing:1px; font-size:1.1rem; display:block; margin-bottom:0.5rem;">Consequence Cards</span>
-        <div class="output-tag-list">`;
-      chosenConsequences.forEach(card => {
-        htmlContent += `<span class="output-tag-item consequence-style">${card}</span>`;
-      });
-      htmlContent += `</div></div>`;
-    }
-    
-    if(chosenRewards.length > 0) {
-      htmlContent += `<div>
-        <span style="color:var(--green-light); font-family:'Bebas Neue', sans-serif; letter-spacing:1px; font-size:1.1rem; display:block; margin-bottom:0.5rem;">Reward Cards</span>
-        <div class="output-tag-list">`;
-      chosenRewards.forEach(card => {
-        htmlContent += `<span class="output-tag-item reward-style">${card}</span>`;
-      });
-      htmlContent += `</div></div>`;
-    }
-    
-    displayBox.style.display = 'block';
-    displayBox.innerHTML = htmlContent;
-  }
-
-  function generateRandomSession() {
-    let mode = document.getElementById('gameMode').value;
-    let limit = parseInt(document.getElementById('cardCount').value);
-    let displayBox = document.getElementById('randomResults');
-    
-    let pool = mode === 'Consequences' ? consequenceCards : mode === 'Rewards' ? rewardCards : consequenceCards.concat(rewardCards);
-    
-    let shuffled = [...pool].sort(() => 0.5 - Math.random());
-    let selected = shuffled.slice(0, Math.min(limit, shuffled.length));
-    
-    let randomConsequences = [];
-    let randomRewards = [];
-    
-    selected.forEach(card => {
-      if (consequenceCards.includes(card)) {
-        randomConsequences.push(card);
-      } else {
-        randomRewards.push(card);
-      }
-    });
-    
-    let htmlContent = `<strong style="color:#ffffff; font-family:'Bebas Neue', sans-serif; text-transform:uppercase; font-size:1.4rem; letter-spacing:1px; display:block; margin-bottom:1rem;">Random Deck:</strong>`;
-    
-    if(randomConsequences.length > 0) {
-      htmlContent += `<div style="margin-bottom:1.25rem;">
-        <span style="color:#c97070; font-family:'Bebas Neue', sans-serif; letter-spacing:1px; font-size:1.1rem; display:block; margin-bottom:0.5rem;">Consequence Cards</span>
-        <div class="output-tag-list">`;
-      randomConsequences.forEach(card => {
-        htmlContent += `<span class="output-tag-item consequence-style">${card}</span>`;
-      });
-      htmlContent += `</div></div>`;
-    }
-    
-    if(randomRewards.length > 0) {
-      htmlContent += `<div>
-        <span style="color:var(--green-light); font-family:'Bebas Neue', sans-serif; letter-spacing:1px; font-size:1.1rem; display:block; margin-bottom:0.5rem;">Reward Cards</span>
-        <div class="output-tag-list">`;
-      randomRewards.forEach(card => {
-        htmlContent += `<span class="output-tag-item reward-style">${card}</span>`;
-      });
-      htmlContent += `</div></div>`;
-    }
-    
-    displayBox.style.display = 'block';
-    displayBox.innerHTML = htmlContent;
-  }
-
-  function downloadSession(targetId) {
-    const targetElement = document.getElementById(targetId);
-    if(targetElement.innerHTML === "" || targetElement.style.display === "none") return;
-    
-    html2canvas(targetElement, { backgroundColor: '#0f0f0f' }).then(canvas => {
-      let link = document.createElement('a');
-      link.download = 'forefeit-deck-session.png';
-      link.href = canvas.toDataURL();
-      link.click();
-    });
-  }
-</script>
-</body>
-</html>
+  .
