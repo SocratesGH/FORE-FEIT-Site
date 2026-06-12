@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FORE!FEIT — The Golf Card Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0d0d0d;
+      --white: #ffffff;
+      --green: #3a7d44;
+      --green-light: #4e9e5a;
+      --grey: #1c1c1c;
+      --grey-mid: #2e2e2e;
+      --text-muted: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--black);
+      border-bottom: 1px solid var(--grey-mid);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--green); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--green); }
+
+    /* HERO */
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 5%;
+      background: radial-gradient(ellipse at 50% 60%, #1a3d20 0%, var(--black) 70%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '⛳';
+      position: absolute;
+      font-size: 28rem;
+      opacity: 0.04;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--green);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 15vw, 11rem);
+      line-height: 0.9;
+      letter-spacing: 0.03em;
+      color: var(--white);
+    }
+
+    .hero h1 .exclaim { color: var(--green); }
+
+    .hero-sub {
+      margin-top: 1.5rem;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 480px;
+    }
+
+    .hero-sub strong { color: var(--white); }
+
+    .hero-cta {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      border-radius: 3px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-green { background: var(--green); color: var(--white); }
+    .btn-green:hover { background: var(--green-light); }
+    .btn-outline { background: transparent; color: var(--white); border: 1px solid var(--grey-mid); }
+    .btn-outline:hover { border-color: var(--green); color: var(--green); }
+
+    /* SECTIONS */
+    section { padding: 5rem 5%; }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--green);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .section-body {
+      color: var(--text-muted);
+      max-width: 600px;
+      font-size: 1rem;
+    }
+
+    /* HOW TO PLAY */
+    #how-to-play { background: var(--grey); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .step {
+      border-left: 3px solid var(--green);
+      padding-left: 1.25rem;
+    }
+
+    .step-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: var(--green);
+      line-height: 1;
+    }
+
+    .step h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0.25rem 0;
+      color: var(--white);
+    }
+
+    .step p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* CARDS SECTION */
+    #cards { background: var(--black); }
+
+    .card-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin: 2rem 0;
+    }
+
+    .tab-btn {
+      padding: 0.5rem 1.5rem;
+      border-radius: 3px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid var(--grey-mid);
+      background: transparent;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active-consequence {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--white);
+    }
+
+    .tab-btn.active-reward {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* CONSEQUENCE CARD */
+    .card-item {
+      border-radius: 6px;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+
+    .card-item:hover { transform: translateY(-4px); }
+
+    .card-item.consequence {
+      background: var(--grey);
+      border: 1px solid var(--grey-mid);
+    }
+
+    .card-item.reward {
+      background: var(--white);
+      border: 1px solid #ddd;
+      color: var(--black);
+    }
+
+    .card-image {
+      width: 100%;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+      display: block;
+      background: var(--grey-mid);
+      position: relative;
+    }
+
+    .card-image-placeholder {
+      width: 100%;
+      aspect-ratio: 3/2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      gap: 0.5rem;
+    }
+
+    .consequence .card-image-placeholder {
+      background: var(--grey-mid);
+    }
+
+    .reward .card-image-placeholder {
+      background: #f0f0f0;
+    }
+
+    .card-image-placeholder span {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.4;
+    }
+
+    .card-body { padding: 1.25rem; }
+
+    .card-trigger {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .consequence .card-trigger { color: var(--green); }
+    .reward .card-trigger { color: var(--green); }
+
+    .card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .consequence .card-name { color: var(--white); }
+    .reward .card-name { color: var(--black); }
+
+    .card-desc {
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .consequence .card-desc { color: var(--text-muted); }
+    .reward .card-desc { color: #555; }
+
+    .card-default {
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 500;
+    }
+
+    .consequence .card-default {
+      border-color: var(--grey-mid);
+      color: var(--text-muted);
+    }
+
+    .reward .card-default {
+      border-color: #ddd;
+      color: #777;
+    }
+
+    .card-default strong {
+      color: var(--green);
+    }
+
+    /* FAQ */
+    #faq { background: var(--grey); }
+
+    .faq-list { margin-top: 2.5rem; max-width: 720px; }
+
+    .faq-item {
+      border-bottom: 1px solid var(--grey-mid);
+    }
+
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--white);
+      text-align: left;
+      padding: 1.25rem 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transition: color 0.2s;
+    }
+
+    .faq-q:hover { color: var(--green); }
+
+    .faq-q .faq-icon {
+      color: var(--green);
+      font-size: 1.2rem;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .faq-a.open { max-height: 300px; padding-bottom: 1.25rem; }
+
+    /* CONTACT */
+    #contact { background: var(--black); text-align: center; }
+    #contact .section-title { margin-bottom: 0.5rem; }
+    #contact .section-body { margin: 0 auto 2.5rem; }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover { color: var(--green); }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--grey);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--grey);
+      border-top: 1px solid var(--grey-mid);
+      padding: 2rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+    }
+
+    .footer-logo span { color: var(--green); }
+
+    footer p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* HIDDEN CARD GRIDS */
+    .cards-grid.hidden { display: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      nav { padding: 0 4%; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.75rem; }
+      section { padding: 3.5rem 4%; }
+      .hero { min-height: 80vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">FORE<span>!</span>FEIT</a>
+    <ul class="nav-links">
+      <li><a href="#how-to-play">How to Play</a></li>
+      <li><a href="#cards">Cards</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">The Golf Card Game</p>
+    <h1>FORE<span class="exclaim">!</span>FEIT</h1>
+    <p class="hero-sub">Play it during your round. Every bad shot — or brilliant one — earns a card. <strong>Carry it into the next hole and face what comes with it.</strong></p>
+    <div class="hero-cta">
+      <a href="#how-to-play" class="btn btn-green">How to Play</a>
+      <a href="#cards" class="btn btn-outline">View Cards</a>
+    </div>
+  </section>
+
+  <!-- HOW TO PLAY -->
+  <section id="how-to-play">
+    <p class="section-label">How to Play</p>
+    <h2 class="section-title">Simple Rules.<br>Serious Bragging Rights.</h2>
+    <p class="section-body">FORE!FEIT drops into any round with any group. Pick your cards, play your game, and let the chaos unfold.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Pick Your Cards</h3>
+        <p>Choose cards that suit your course — not every course has a bunker. Match the number of cards to the number of players.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Earn a Card</h3>
+        <p>A card is awarded when its trigger event happens during a hole — ball in water, longest drive, chip-in, and more.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Carry It Forward</h3>
+        <p>The card takes effect on the <em>next hole</em>. You hold it until someone else earns it — so play well, or pay the price.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Make It Yours</h3>
+        <p>Mix consequences and rewards in the same game. Swap in custom forfeits. There are baseline rules, but how you play is up to your group.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARDS -->
+  <section id="cards">
+    <p class="section-label">The Cards</p>
+    <h2 class="section-title">Know Your Cards.</h2>
+    <p class="section-body">Six consequence cards, six reward cards. Each comes with a default effect — but the library on this page gives you options to swap in your own.</p>
+
+    <div class="card-tabs">
+      <button class="tab-btn active-consequence" onclick="showTab('consequence', this)">⚫ Consequences</button>
+      <button class="tab-btn" onclick="showTab('reward', this)">⚪ Rewards</button>
+    </div>
+
+    <!-- CONSEQUENCE CARDS -->
+    <div class="cards-grid" id="consequence-grid">
+
+      <div class="card-item consequence">
+        <div class="card-image-placeholder">⛱️<span>bunker-buster.png</span></div>
+        <div class="card-body">
+          <p class="card-trigger">Trigger: Ball lands in a bunker</p>
+          <h3 class="card-name">Bunker Buster</h3>
+          <p class="card-desc">Your sand trap becomes your identity. Carry this card and everyone knows you found the beach.</p>
+          <div class="card-default">🎯 Default: <strong>Only one club</strong> for the entire hole.</div>
+        </div>
+      </div>
+
+      <div class="card-item consequence">
+        <div class="card-image-placeholder">🚧<span>fence-hopper.png</span></div>
+        <div class="card-body">
+          <p class="card-trigger">Trigger: Ball goes out of bounds</p>
+          <h3 class="card-name">Fence Hopper</h3>
+          <p class="card-desc">Your ball went for a walk. Now it's going to cost you.</p>
+          <div class="card-default">🎯 Default: <strong>+1 stroke</strong> added to your hole score.</div>
+        </div>
+      </div>
+
+      <div class="card-item consequence">
+        <div class="card-image-placeholder">💧<span>splash-zone.png</span></div>
+        <div class="card-body">
+          <p class="card-trigger">Trigger: Ball lands in water</p>
+          <h3 class="card-name">Splash Zone</h3>
+          <p class="card-desc">You found the water. Now the group gets to find your ball for you.</p>
+          <div class="card-default">🎯 Default: <strong>Group throws your ball</strong> at any point during the hole.</div>
+        </div>
+      </div>
+
+      <div class="card-item consequence">
+        <div class="card-image-placeholder">🌿<span>bush-whacker.png</span></div>
+        <div class="card-body">
+          <p class="card-trigger">Trigger: Ball lands in rough or bush</p>
+          <h3 class="card-name">Bush Whacker</h3>
+          <p class="card-desc">You went exploring. Now play with what you've got — just not the putter.</p>
+          <div class="card-default">🎯 Default: <strong>Anything but a putter</strong> for the entire hole.</div>
+        </div>
+      </div>
+
+      <div class="card-item consequence">
+        <div class="card-image-placeholder">🌳<span>tree-hugger.png</span></div>
+        <div class="card-body">
+          <p class="card-trigger">Trigger: Ball hits a tree</p>
+          <h3 class="card-name">Tree Hugger</h3>
+          <p class="card-desc">The fairway was right there. Instead, you hugged a tree.</p>
+          <div class="card-default">🎯 Default: <strong>Blind tee shot</strong> — no looking before you swing.</div>
+        </div>
+      </div>
+
+      <div class="card-item consequence">
+        <div class="card-image-placeholder">🕵️<span>the-houdini.png</span></div>
+        <div class="card-body">
+          <p class="card-trigger">Trigger: Ball is lost</p>
+          <h3 class="card-name">The Houdini</h3>
+          <p class="card-desc">Your ball vanished. Now your best shot will too.</p>
+          <div class="card-default">🎯 Default: <strong>Reverse mulligan</strong> — the group picks your worst shot to replay.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- REWARD CARDS -->
+    <div class="cards-grid hidden" id="reward-grid">
+
+      <div class="card-item reward">
+        <div class="card-image-placeholder">🏌️<span>par-fection.png</span></div>
+        <div class="card-body">
+          <p class="card-trigger">Trigger: Makes par</p>
+          <h3 class="card-name">Par Fection</h3>
+          <p class="card-desc">Solid, consistent, reliable. Par is the foundation — now build on it.</p>
+          <div class="card-default">🎯 Default: <strong>Fix lie</strong> — improve your ball position once during the hole.</div>
+        </div>
+      </div>
+
+      <div class="card-item reward">
+        <div class="card-image-placeholder">🥂<span>chip-n-dip.png</span></div>
+        <div class="card-body">
+          <p class="card-trigger">Trigger: Chips in from off the green</p>
+          <h3 class="card-name">Chip 'n Dip</h3>
+          <p class="card-desc">You skipped the green and went straight to the bottom of the cup. Celebrate accordingly.</p>
+          <div class="card-default">🎯 Default: <strong>Gimme Gimme</strong> — putts within a club length count as holed.</div>
+        </div>
+      </div>
+
+      <div class="card-item reward">
+        <div class="card-image-placeholder">🦅<span>eager-eagle.png</span></div>
+        <div class="card-body">
+          <p class="card-trigger">Trigger: Makes eagle</p>
+          <h3 class="card-name">Eager Eagle</h3>
+          <p class="card-desc">Two under. You earned the best reward in the bag.</p>
+          <div class="card-default">🎯 Default: <strong>Relief anywhere</strong> — drop your ball wherever you like, no penalty.</div>
+        </div>
+      </div>
+
+      <div class="card-item reward">
+        <div class="card-image-placeholder">⏱️<span>early-bird.png</span></div>
+        <div class="card-body">
+          <p class="card-trigger">Trigger: First to finish a hole</p>
+          <h3 class="card-name">Early Bird</h3>
+          <p class="card-desc">Speed and efficiency rewarded. First one in earns the advantage.</p>
+          <div class="card-default">🎯 Default: <strong>Play from front tees</strong> on the next hole.</div>
+        </div>
+      </div>
+
+      <div class="card-item reward">
+        <div class="card-image-placeholder">📍<span>pin-seeker.png</span></div>
+        <div class="card-body">
+          <p class="card-trigger">Trigger: Ball lands within a club length of the pin</p>
+          <h3 class="card-name">Pin Seeker</h3>
+          <p class="card-desc">Dead on target. That's the kind of shot that wins rounds.</p>
+          <div class="card-default">🎯 Default: <strong>-1 stroke</strong> deducted from your hole score.</div>
+        </div>
+      </div>
+
+      <div class="card-item reward">
+        <div class="card-image-placeholder">💨<span>go-long.png</span></div>
+        <div class="card-body">
+          <p class="card-trigger">Trigger: Longest drive on the hole</p>
+          <h3 class="card-name">Go Long</h3>
+          <p class="card-desc">Big hitter, big reward. The longest ball off the tee earns the edge next hole.</p>
+          <div class="card-default">🎯 Default: <strong>Start from best tee off</strong> — use the group's best tee shot position.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <p class="section-label">FAQ</p>
+    <h2 class="section-title">Good Questions.</h2>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How many cards do I need?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Match the number of cards to the number of players in your group. If you're playing with 4 people, pick 4 cards for your game.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          When does the card effect kick in?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">The card takes effect on the hole after you earn it — not the hole you're on when you get it. So if you land in water on hole 5, you carry Splash Zone into hole 6.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How long do I keep a card?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">You hold onto a card until another player triggers the same card event. Then it passes to them. If no one triggers it again, you carry it to the end of the round.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Can I mix consequence and reward cards?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Absolutely. Mixing both types in the same game is encouraged. They don't interact with each other — each card is its own standalone effect.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do I have to use the default effect on each card?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">No. Each card comes with a suggested default, but you can swap in any consequence or reward from the full library before your round starts. Agree on the pairings as a group and play your way.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What if my course doesn't have a bunker or water?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">That's exactly why the cards are interchangeable. Pick the cards that are relevant to your course. If Bunker Buster doesn't apply, swap it out for something that does.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Where do I get extra cards?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Additional and replacement cards are available to purchase separately. Get in touch via the contact details below and we'll sort you out.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Get in Touch</p>
+    <h2 class="section-title">We'd Love to Hear From You.</h2>
+    <p class="section-body">Questions, orders, or just want to share how your round went — reach out.</p>
+    <div class="contact-links">
+      <a href="tel:0733195999" class="contact-link">
+        <div class="contact-icon">📞</div>
+        073 319 5999
+      </a>
+      <a href="mailto:monrevwpersonal@gmail.com" class="contact-link">
+        <div class="contact-icon">✉️</div>
+        monrevwpersonal@gmail.com
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">FORE<span>!</span>FEIT</span>
+    <p>© 2025 FORE!FEIT. All rights reserved.</p>
+    <p>forefeit.co.za</p>
+  </footer>
+
+  <script>
+    function showTab(type, btn) {
+      const consequenceGrid = document.getElementById('consequence-grid');
+      const rewardGrid = document.getElementById('reward-grid');
+      const tabs = document.querySelectorAll('.tab-btn');
+
+      tabs.forEach(t => {
+        t.classList.remove('active-consequence', 'active-reward');
+      });
+
+      if (type === 'consequence') {
+        consequenceGrid.classList.remove('hidden');
+        rewardGrid.classList.add('hidden');
+        btn.classList.add('active-consequence');
+      } else {
+        rewardGrid.classList.remove('hidden');
+        consequenceGrid.classList.add('hidden');
+        btn.classList.add('active-reward');
+      }
+    }
+
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const isOpen = answer.classList.contains('open');
+
+      document.querySelectorAll('.faq-a.open').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q.open').forEach(q => q.classList.remove('open'));
+
+      if (!isOpen) {
+        answer.classList.add('open');
+        btn.classList.add('open');
+      }
+    }
+  </script>
+
+</body>
+</html>
